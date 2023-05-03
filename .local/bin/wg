@@ -1,0 +1,8 @@
+#!/bin/sh
+COUNTRY="fi"
+CONFIG="/home/$USER/xeovo/xeovo-$COUNTRY.conf"
+if [ -z $(ip link | grep $COUNTRY) ]; then
+	pkexec wg-quick up $CONFIG
+else
+	pkexec wg-quick down $CONFIG
+fi

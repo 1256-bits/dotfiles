@@ -1,0 +1,5 @@
+#!/bin/sh
+line=$(cat ~/shell/cli-data | dmenu)
+if test $line; then
+	kitty -e $line
+fi

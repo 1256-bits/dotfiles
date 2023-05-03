@@ -1,0 +1,26 @@
+ctrl+alt+z:
+	brave
+super+d:
+	discord
+super+c:
+	cli-tools
+super+alt+End:
+	poweroff
+super+F6:
+	amixer -D pulse set Master toggle
+super+F7:
+	pactl set-sink-volume @DEFAULT_SINK@ -5%
+super+F8:
+	pactl set-sink-volume @DEFAULT_SINK@ +5%
+super+shift+F7:
+	pactl set-sink-volume @DEFAULT_SINK@ -1%
+super+shift+F8:
+	pactl set-sink-volume @DEFAULT_SINK@ +1%
+super+alt+h:
+	xdg-open ~/Pictures/cheatsheet.png
+super+p; s:
+	i3-gnome-pomodoro start-stop
+super+p; t:
+	i3-gnome-pomodoro toggle
+super+p; k:
+	i3-gnome-pomodoro skip
