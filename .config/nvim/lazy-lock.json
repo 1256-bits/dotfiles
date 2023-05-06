@@ -1,0 +1,5 @@
+{
+  "lazy.nvim": { "branch": "main", "commit": "ceb413678dfcf3d5455208959185e3db1f7892c7" },
+  "lsp-zero.nvim": { "branch": "v2.x", "commit": "8c73b7bbd0f185829ab9b2650b7761c94db5a920" },
+  "sxhkd-vim": { "branch": "master", "commit": "7b7937ff5c220fbef3bdd883d567513246516e06" }
+}
