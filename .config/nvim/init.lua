@@ -1,5 +1,6 @@
 require("modules.remaps")
 require("modules.lazy")
+require("modules.plugin.lsp")
 
 vim.opt.number = true
 vim.opt.relativenumber = true
