@@ -34,7 +34,6 @@ export VISUAL="nvim"
 autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
-alias vimcfg="nvim ~/.config/nvim/init.vim"
 #export PATH=$PATH:~/.emacs.d/bin
 #export PATH=$PATH:~/.roswell/bin
 
