@@ -2,6 +2,7 @@ require("modules.remaps")
 require("modules.lazy")
 require("modules.plugin.lsp")
 require("modules.plugin.treesitter")
+require("modules.plugin.telescope")
 
 vim.opt.number = true
 vim.opt.relativenumber = true
