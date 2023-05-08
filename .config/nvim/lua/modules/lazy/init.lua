@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
 	'kovetskiy/sxhkd-vim',
 	'VonHeikemen/lsp-zero.nvim',
+	'ThePrimeagen/harpoon',
 	{
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.1',
