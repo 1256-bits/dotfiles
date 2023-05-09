@@ -8,6 +8,6 @@ vim.opt.shiftwidth = 4
 vim.opt.wrap = true
 vim.opt.ignorecase = true
 vim.opt.undodir = "~/.local/share/nvim/undodir/"
---vim.opt.
+vim.opt.clipboard = "unnamedplus"
 --vim.opt.
 --vim.opt.
