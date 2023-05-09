@@ -420,7 +420,7 @@ key_bindings:
   - { key: PageDown,  mods: None,          action: ScrollPageDown, mode: ~Alt  }
   - { key: Home,      mods: Shift,         action: ScrollToTop,    mode: ~Alt  }
   - { key: End,       mods: Shift,         action: ScrollToBottom, mode: ~Alt  }
-  - { key: Semicolon, mods: Control,       chars: "\x1b[59;5u"                 }
+    #  - { key: Semicolon, mods: Control,       chars: "\x1b[59;5u"                 }
 
 import:
   - ~/.config/alacritty/themes/nord.yml
