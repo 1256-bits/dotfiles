@@ -79,3 +79,5 @@ export PATH=~/.emacs.d/bin:$PATH
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source ~/.local/share/zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
+eval "$(lua ~/z.lua/z.lua --init zsh)"
