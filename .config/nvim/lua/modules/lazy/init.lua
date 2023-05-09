@@ -15,6 +15,20 @@ local plugins = {
 	'kovetskiy/sxhkd-vim',
 	'VonHeikemen/lsp-zero.nvim',
 	'ThePrimeagen/harpoon',
+	'mbbill/undotree',
+	'hrsh7th/cmp-path',
+	'saadparwaiz1/cmp_luasnip',
+	'hrsh7th/cmp-buffer',
+	{
+		"kylechui/nvim-surround",
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end
+	},
 	{
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.1',
