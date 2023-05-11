@@ -12,7 +12,7 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = true
 vim.opt.ignorecase = true
-vim.opt.clipboard = "unnamedplus"
+--vim.opt.clipboard = "unnamedplus"
 
 vim.opt.swapfile = false
 vim.opt.undodir = os.getenv("HOME") .. "/.local/share/nvim/undodir/"
