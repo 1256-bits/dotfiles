@@ -170,7 +170,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 		position top
-        status_command i3status_mod
+        status_command i3status
 }
 
 #Start GNOME keyring
