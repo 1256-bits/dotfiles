@@ -3,11 +3,23 @@ require("modules.lazy")
 
 vim.opt.number = true
 vim.opt.relativenumber = true
+
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+vim.opt.smartindent = true
+
 vim.opt.wrap = true
 vim.opt.ignorecase = true
-vim.opt.undodir = "~/.local/share/nvim/undodir/"
 vim.opt.clipboard = "unnamedplus"
---vim.opt.
---vim.opt.
+
+vim.opt.swapfile = false
+vim.opt.undodir = os.getenv("HOME") .. "/.local/share/nvim/undodir/"
+vim.opt.undofile = true
+
+vim.opt.scrolloff = 8
+vim.opt.incsearch = true
+vim.opt.signcolumn = "yes"
+vim.opt.colorcolumn = "80"
+vim.cmd.highlight({"ColorColumn", "ctermbg=8"})
