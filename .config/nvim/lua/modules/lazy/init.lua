@@ -19,6 +19,7 @@ local plugins = {
 	'hrsh7th/cmp-path',
 	'saadparwaiz1/cmp_luasnip',
 	'hrsh7th/cmp-buffer',
+	'tpope/vim-fugitive',
 	{
 		"kylechui/nvim-surround",
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
