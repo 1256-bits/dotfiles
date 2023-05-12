@@ -23,3 +23,6 @@ vim.opt.incsearch = true
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80"
 vim.cmd.highlight({"ColorColumn", "ctermbg=8"})
+vim.opt.termguicolors = true
+vim.cmd.colorscheme("nord")
+vim.cmd.highlight({"signcolumn", "guibg=dimgray"})
