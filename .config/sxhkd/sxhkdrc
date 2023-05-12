@@ -2,8 +2,6 @@ ctrl+alt+z:
 	brave
 super+d:
 	discord
-super+c:
-	cli-tools
 super+alt+End:
 	poweroff
 super+F6:
