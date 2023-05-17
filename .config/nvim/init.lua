@@ -1,5 +1,6 @@
 require("modules.remaps")
 require("modules.lazy")
+require("modules.utils.init")
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -26,3 +27,4 @@ vim.cmd.highlight({"ColorColumn", "ctermbg=8"})
 vim.opt.termguicolors = true
 vim.cmd.colorscheme("nord")
 vim.cmd.highlight({"signcolumn", "guibg=dimgray"})
+vim.opt.splitright = true
