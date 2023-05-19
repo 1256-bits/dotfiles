@@ -207,6 +207,7 @@ for_window [title="SwiftRead"] fullscreen enable
 #workspace assignment
 assign [class="discord"] 10
 assign [class="steam"] 3
+assign [class="brave"] 2
 
 #misc
 exec --no-startup-id qbittorrent
