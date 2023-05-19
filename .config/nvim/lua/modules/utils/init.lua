@@ -5,5 +5,5 @@ vim.api.nvim_create_user_command('HelpAutosplit',
         else
             vim.fn.execute([[help ]] .. opts.fargs[1])
         end
-    end, { nargs = 1 })
+    end, { nargs = 1, complete = "help" })
 vim.cmd'cnoreabbrev h HelpAutosplit'
