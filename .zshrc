@@ -82,3 +82,5 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 eval "$(lua ~/z.lua/z.lua --init zsh)"
 alias rm="rm -v"
+alias dotadd="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add "
+alias dotcom="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit -m "
