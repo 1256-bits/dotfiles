@@ -21,6 +21,7 @@ local plugins = {
 	'hrsh7th/cmp-buffer',
 	'tpope/vim-fugitive',
     'nordtheme/vim', 
+    'jose-elias-alvarez/null-ls.nvim',
 	{
 		"kylechui/nvim-surround",
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
