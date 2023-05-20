@@ -11,3 +11,10 @@ vim.api.nvim_create_user_command('HelpAutosplit',
         end
     end, { nargs = 1, complete = "help" })
 vim.cmd 'cnoreabbrev h HelpAutosplit'
+
+vim.api.nvim_create_user_command('Fnlfmt',
+    function()
+        if (vim.fn.expand("%:e") == "fnl") or (vim.opt.syntax._value == "fennel") then
+            vim.cmd("silent !fnlfmt --fix %")
+        end
+    end, { nargs = 0 })
