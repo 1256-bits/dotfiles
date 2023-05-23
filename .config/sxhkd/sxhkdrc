@@ -17,7 +17,7 @@ super+shift+F8:
 super+alt+h:
 	xdg-open ~/Pictures/cheatsheet.png
 super+p; s:
-	i3-gnome-pomodoro start-stop
+	[[ -z $(pgrep gnome-pomodoro) ]] && i3-gnome-pomodoro start || gnome-pomodoro --quit
 super+p; t:
 	i3-gnome-pomodoro toggle
 super+p; k:

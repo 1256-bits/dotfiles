@@ -170,7 +170,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 		position top
-        status_command i3status
+        status_command i3status_mod
 }
 
 #Start GNOME keyring
@@ -180,7 +180,7 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secr
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 #Start sxhkd
-exec --no-startup-id /usr/bin/sxhkd -a Escape
+exec_always --no-startup-id /usr/bin/sxhkd -a Escape
 
 #Add wallpaper
 exec --no-startup-id nitrogen --restore
@@ -214,5 +214,5 @@ exec --no-startup-id qbittorrent
 default_border pixel
 smart_gaps on
 gaps outer 0
-exec --no-startup-id setxkbmap -model 105 -layout us,ru -option grp:alt_shift_toggle
+exec_always --no-startup-id setxkbmap -model 105 -layout us,ru -option grp:alt_shift_toggle
 exec --no-startup-id syncthing --no-browser
