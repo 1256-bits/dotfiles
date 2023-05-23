@@ -4,5 +4,6 @@ null_ls.setup({
     sources = {
         null_ls.builtins.formatting.fnlfmt,
         null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.shfmt,
     },
 })
