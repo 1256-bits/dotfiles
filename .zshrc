@@ -57,7 +57,6 @@ alias D="DRI_PRIME=1"
 alias rtw="cd ~/rtw88/ && sudo make install && sudo modprobe rtw_8723de"
 alias mv="mv -iv"
 alias o="xdg-open"
-alias r="ranger"
 alias dotfs="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 ##VPN
