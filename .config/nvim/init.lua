@@ -25,6 +25,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80"
 vim.cmd.highlight({"ColorColumn", "ctermbg=8"})
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("nord")
+vim.cmd.colorscheme("nordfox")
 vim.cmd.highlight({"signcolumn", "guibg=dimgray"})
 vim.opt.splitright = true
