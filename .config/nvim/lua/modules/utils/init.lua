@@ -1,7 +1,7 @@
 vim.api.nvim_create_user_command('HelpAutosplit',
     function(opts)
         local err
-        if vim.fn.winwidth('%') > vim.fn.winheight('%') then
+        if vim.fn.winwidth('%') > 100 then
             err = pcall(function() vim.cmd([[vertical help ]] .. opts.fargs[1]) end)
         else
             err = pcall(function() vim.cmd([[help ]] .. opts.fargs[1]) end)
