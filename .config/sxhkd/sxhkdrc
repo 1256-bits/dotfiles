@@ -22,3 +22,5 @@ super+p; t:
 	i3-gnome-pomodoro toggle
 super+p; k:
 	i3-gnome-pomodoro skip
+super+o:
+	emacsclient -a '' -c "~/Documents/org"
