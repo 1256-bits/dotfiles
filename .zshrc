@@ -57,6 +57,7 @@ alias dotadd="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add "
 alias dotcom="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit -m "
 alias dotdiff="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME diff"
 alias dotstat="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME status"
+alias dotpush="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push"
 
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
