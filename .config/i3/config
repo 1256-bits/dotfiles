@@ -197,7 +197,7 @@ exec --no-startup-id pasystray
 exec --no-startup-id pa-notify
 
 #compositor
-exec --no-startup-id picom
+exec --no-startup-id picom -D 0
 
 #window options
 for_window [class="mpv"] floating enable
