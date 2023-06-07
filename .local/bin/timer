@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+TIMER=$(printf "60 * %i\n" "$1" | bc)
+while [ "$TIMER" -ge 1 ]; do
+	MINUTES=$(printf "%i / 60\n" "$TIMER" | bc)
+    SECONDS=$(printf "%i %% 60\n" "$TIMER" | bc)
+	[ "$MINUTES" -eq 0 ] && echo -en "\r\033[K$TIMER" || echo -en "\r\033[K$MINUTES:$SECONDS"
+	TIMER=$(printf "%i - 1\n" "$TIMER" | bc)
+	sleep 1
+done
+echo "Done" && espeak "e"
