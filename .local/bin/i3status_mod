@@ -1,8 +1,8 @@
 #!/bin/sh
 
 i3status | while :; do
-	read line
-	if [[ -n $(pgrep gnome-pomodoro) ]]; then
+	read -r line
+	if [ -n "$(pgrep gnome-pomodoro)" ]; then
 		pomodoro="$(i3-gnome-pomodoro status) |"
     else
         pomodoro=""
