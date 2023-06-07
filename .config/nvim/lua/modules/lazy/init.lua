@@ -23,6 +23,7 @@ local plugins = {
     'shaunsingh/nord.nvim',
     'jose-elias-alvarez/null-ls.nvim',
     'EdenEast/nightfox.nvim',
+    'mfussenegger/nvim-dap',
     {
         'mcchrish/zenbones.nvim',
         dependencies = { 'rktjmp/lush.nvim' }
