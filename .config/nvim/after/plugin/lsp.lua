@@ -77,6 +77,9 @@ require 'lspconfig'.pylsp.setup {
             plugins = {
                 pycodestyle = {
                     maxLineLength = 100,
+                },
+                jedi = {
+                    environment = vim.fn.expand("$HOME") .. "/.local/lib/python3.11/"
                 }
             }
         }
