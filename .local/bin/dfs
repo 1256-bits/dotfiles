@@ -1,0 +1,11 @@
+#!/bin/sh
+
+DOTFS="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+case "$1" in
+"diff") $DOTFS diff "$($DOTFS status | grep modified | awk '{print $2}' | fzf)" ;;
+"stat") $DOTFS status ;;
+"add") $DOTFS add "$([ -n "$2" ] && echo "$2" || $DOTFS status | grep modified | awk '{print $2}' | fzf)" ;;
+"com") $DOTFS commit -m "$2" ;;
+"push") $DOTFS push ;;
+*) $DOTFS "$@" ;;
+esac
