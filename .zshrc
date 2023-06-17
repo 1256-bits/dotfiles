@@ -70,3 +70,4 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 #source ~/.local/share/zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 eval "$(lua ~/z.lua/z.lua --init zsh)"
 alias rm="rm -v"
+alias lf="lfrun"
