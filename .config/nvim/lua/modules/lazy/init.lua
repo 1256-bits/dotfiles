@@ -25,6 +25,10 @@ local plugins = {
     'EdenEast/nightfox.nvim',
     'mfussenegger/nvim-dap',
     {
+        'rcarriga/nvim-dap-ui',
+        dependencies = { 'mfussenegger/nvim-dap' }
+    },
+    {
         'mcchrish/zenbones.nvim',
         dependencies = { 'rktjmp/lush.nvim' }
     },
@@ -60,9 +64,9 @@ local plugins = {
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' }, -- Required
+            { 'hrsh7th/nvim-cmp' },     -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-            { 'L3MON4D3/LuaSnip' }, -- Required
+            { 'L3MON4D3/LuaSnip' },     -- Required
         }
     }
 }
