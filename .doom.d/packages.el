@@ -53,3 +53,5 @@
 (package! reverse-im)
 (unpin! org-roam)
 (package! org-roam-ui)
+(package! tree-sitter)
+(package! tree-sitter-langs)
