@@ -36,7 +36,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -74,7 +74,6 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-(setq display-line-numbers-type 'relative)
 
 ;;Harpoon
 (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
@@ -109,7 +108,10 @@
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
-
+;;Tree sitter
+(tree-sitter-require 'javascript)
+(add-hook! javascript-mode
+           (tree-sitter-mode))
 ;;custom elisp functions
 (defun org-insert-code-block ()
   (interactive)
