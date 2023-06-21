@@ -8,4 +8,4 @@ while [ "$TIMER" -ge 1 ]; do
 	TIMER=$(printf "%i - 1\n" "$TIMER" | bc)
 	sleep 1
 done
-echo "Done" && espeak "e"
+echo "Done" && notify-send "$1 is done"
