@@ -110,8 +110,9 @@
           org-roam-ui-open-on-start t))
 ;;Tree sitter
 (tree-sitter-require 'javascript)
-(add-hook! javascript-mode
-           (tree-sitter-mode))
+(add-hook! js-mode
+           (tree-sitter-mode)
+           (tree-sitter-hl-mode))
 ;;custom elisp functions
 (defun org-insert-code-block ()
   (interactive)
