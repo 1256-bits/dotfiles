@@ -55,3 +55,4 @@
 (package! org-roam-ui)
 (package! tree-sitter)
 (package! tree-sitter-langs)
+(package! org-transclusion)

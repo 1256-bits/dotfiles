@@ -33,6 +33,15 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 14)
+      doom-variable-pitch-font (font-spec :family "NotoSans" :size 15)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 24))
+(after! doom-themes
+  (setq doom-themes-enable-italic t)
+  (setq doom-themes-enable-bold t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -40,7 +49,8 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Documents/org/")
+(setq org-directory "~/Documents/org/"
+      org-hide-emphasis-markers t)
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -94,6 +104,7 @@
 (org-roam-db-autosync-mode)
 (map! :leader "r i" #'org-roam-node-insert)
 (map! :leader "r f" #'org-roam-node-find)
+(map! :leader "r b" #'org-roam-buffer-toggle)
 ;;Org roam ui
 (use-package! websocket
     :after org-roam)
@@ -108,6 +119,12 @@
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
+;;Transclusion
+(use-package! org-transclusion
+              :after org
+              :init
+              (map! :leader "t a" #'org-transclusion-add)
+              (org-transclusion-mode t))
 ;;Tree sitter
 (tree-sitter-require 'javascript)
 (add-hook! js-mode
