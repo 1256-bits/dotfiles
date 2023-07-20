@@ -102,9 +102,13 @@
 ;;Org roam
 (setq org-roam-directory (file-truename "~/Documents/roam"))
 (org-roam-db-autosync-mode)
+(add-hook! org-roam-mode (visual-line-mode))
 (map! :leader "r i" #'org-roam-node-insert)
 (map! :leader "r f" #'org-roam-node-find)
 (map! :leader "r b" #'org-roam-buffer-toggle)
+(map! :leader "r e" #'org-roam-extract-subtree)
+(map! :leader "r t a" #'org-roam-tag-add)
+(map! :leader "r t r" #'org-roam-tag-remove)
 ;;Org roam ui
 (use-package! websocket
     :after org-roam)
@@ -125,11 +129,15 @@
               :init
               (map! :leader "t a" #'org-transclusion-add)
               (org-transclusion-mode t))
+(after! org-roam
+  (setq org-roam-db-extra-links-exclude-keys
+        '((node-property "ROAM_REFS")))
+  (setq org-roam-db-extra-links-elements '(keyword "transclude")))
 ;;Tree sitter
 (tree-sitter-require 'javascript)
 (add-hook! js-mode
-           (tree-sitter-mode)
-           (tree-sitter-hl-mode))
+  (tree-sitter-mode)
+  (tree-sitter-hl-mode))
 ;;custom elisp functions
 (defun org-insert-code-block ()
   (interactive)
