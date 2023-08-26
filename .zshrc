@@ -64,6 +64,7 @@ alias dotpush="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push"
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH=~/.nvm/versions/node/v18.13.0/bin:$PATH
 export PATH=~/.emacs.d/bin:$PATH
+export PATH=~/ani-cli/:$PATH
 
 #plugins
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

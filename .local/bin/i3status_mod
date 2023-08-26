@@ -4,8 +4,9 @@ i3status | while :; do
 	read -r line
 	if [ -n "$(pgrep gnome-pomodoro)" ]; then
 		pomodoro="$(i3-gnome-pomodoro status) |"
-    else
-        pomodoro=""
+	else
+		pomodoro=""
 	fi
-	echo "$pomodoro $line" || exit 1
+	sensors=$(sensors | grep temp1 | head -1 | awk '{print $2}')
+	echo "$pomodoro $line | $sensors" || exit 1
 done
