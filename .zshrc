@@ -41,7 +41,7 @@ alias ls="exa --group-directories-first --icons"
 alias lss="exa -ls=size"
 alias lsr="exa -lsr=size"
 alias grep="rg"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+#export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 ##other
 alias D="DRI_PRIME=1"
@@ -64,6 +64,7 @@ alias dotpush="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push"
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH=~/.nvm/versions/node/v18.13.0/bin:$PATH
 export PATH=~/.emacs.d/bin:$PATH
+export PATH=~/.config/emacs/bin:$PATH
 export PATH=~/ani-cli/:$PATH
 
 #plugins
@@ -72,3 +73,4 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 eval "$(lua ~/z.lua/z.lua --init zsh)"
 alias rm="rm -v"
 alias lf="lfrun"
+alias yay="yay --sudoloop"
