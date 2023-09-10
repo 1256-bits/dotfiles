@@ -42,6 +42,7 @@
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
+(set-mouse-color "snow")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -133,11 +134,8 @@
   (setq org-roam-db-extra-links-exclude-keys
         '((node-property "ROAM_REFS")))
   (setq org-roam-db-extra-links-elements '(keyword "transclude")))
-;;Tree sitter
-(tree-sitter-require 'javascript)
-(add-hook! js-mode
-  (tree-sitter-mode)
-  (tree-sitter-hl-mode))
+;; reverse-im
+(reverse-im-mode t)
 ;;custom elisp functions
 (defun org-insert-code-block ()
   (interactive)
