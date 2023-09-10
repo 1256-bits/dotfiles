@@ -47,7 +47,6 @@ alias grep="rg"
 alias D="DRI_PRIME=1"
 alias rtw="cd ~/rtw88/ && sudo make install && sudo modprobe rtw_8723de"
 alias mv="mv -iv"
-alias o="xdg-open"
 alias dotfs="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 ##VPN
@@ -78,3 +77,11 @@ alias yay="yay --sudoloop"
 if command -v tmux > /dev/null && [[ ! "$TERM" =~ tmux ]]; then
     exec tmux;
 fi
+#xdg-open
+function o {
+    if [[ ! -e "$1" ]]; then
+        echo "File $1 does not exist"
+        return
+    fi
+    xdg-open $1 2> /dev/null & disown
+}
