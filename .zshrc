@@ -74,3 +74,7 @@ eval "$(lua ~/z.lua/z.lua --init zsh)"
 alias rm="rm -v"
 alias lf="lfrun"
 alias yay="yay --sudoloop"
+#launch tmux on login
+if command -v tmux > /dev/null && [[ ! "$TERM" =~ tmux ]]; then
+    exec tmux;
+fi
