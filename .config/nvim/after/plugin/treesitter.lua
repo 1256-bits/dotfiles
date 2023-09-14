@@ -1,6 +1,6 @@
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = { "javascript", "typescript", "bash", "c", "lua", "vim", "vimdoc", "query", "html", "sxhkdrc",
-        "scss", },
+        "scss", "nu", },
     sync_install = false,
     auto_install = true,
     highlight = {
