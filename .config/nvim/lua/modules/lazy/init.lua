@@ -24,6 +24,7 @@ local plugins = {
     'jose-elias-alvarez/null-ls.nvim',
     'EdenEast/nightfox.nvim',
     'mfussenegger/nvim-dap',
+    'LhKipp/nvim-nu',
     {
         'rcarriga/nvim-dap-ui',
         dependencies = { 'mfussenegger/nvim-dap' }
