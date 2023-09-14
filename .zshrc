@@ -77,11 +77,3 @@ alias yay="yay --sudoloop"
 if command -v tmux > /dev/null && [[ ! "$TERM" =~ tmux ]]; then
     exec tmux;
 fi
-#xdg-open
-function o {
-    if [[ ! -e "$1" ]]; then
-        echo "File $1 does not exist"
-        return
-    fi
-    xdg-open $1 2> /dev/null & disown
-}
