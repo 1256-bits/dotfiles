@@ -1,0 +1,7 @@
+#!/bin/env nu
+
+let ignorelist = [Platform, Gtk3theme]
+let flatlist = flatpak list | lines | split column -r '	' | rename name id version branch installation
+let flatpaks = $flatlist | where {|line| $ignorelist | all {|it| $line.id !~ $it }}
+let choice = $flatpaks | get name | to text | rofi -dmenu
+bash -c $'flatpak run ($flatpaks | where name == $choice | get id | to text) & disown' out+err> /dev/null

@@ -1,11 +1,12 @@
 ### Aliases ###
 
-alias spS = sudo pacman -Syu
+alias spS = sudo pacman -S
 alias spR = sudo pacman -Rns
 alias yay = yay --sudoloop
 alias get-dirs = where type == "dir" or type == "symlink"
 alias get-files = where type == "file"
 alias eza = eza --group-directories-first --icons
+alias oldpwd = cd $env.OLDPWD
 
 alias vim = nvim
 alias cat = bat
@@ -24,13 +25,6 @@ alias cp = cp -iuv
 def not-empty [] { not ($in | is-empty) }
 # List installed flatpaks in a table
 def flatlist [] = { flatpak list | lines | split column -r '	' | rename name id version branch installation }
-# Launch a flatpak
-def flatrun [] = {
-    let ignorelist = [Platform, Gtk3theme]
-    let flatpaks = flatlist | where {|line| $ignorelist | all {|it| $line.id !~ $it }}
-    let choice = $flatpaks | get name | to text | fzf
-    bash -c $'flatpak run ($flatpaks | where name == $choice | get id | to text) & disown'
-}
 
 
 ### Startup commands ###
