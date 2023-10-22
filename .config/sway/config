@@ -237,8 +237,6 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
     exec_always --no-startup-id /usr/bin/swhkd -a Escape
 
-#Won't work on wayland
-#exec --no-startup-id dunst
 
 #audio constrols
     exec --no-startup-id pasystray
@@ -275,3 +273,4 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     exec --no-startup-id udiskie
     exec --no-startup-id $HOME/swhkd.sh 
     exec --no-startup-id swaybg -i ~/Pictures/1671442087827629.jpg
+    exec --no-startup-id dunst
