@@ -242,9 +242,6 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     exec --no-startup-id pasystray
     exec --no-startup-id pa-notify
 
-#compositor
-    exec --no-startup-id picom -D 0
-
 #window options
     for_window [class="mpv"] floating enable
     for_window [class="Steam" title="Friends List"] floating enable
