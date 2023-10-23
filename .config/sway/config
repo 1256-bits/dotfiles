@@ -55,7 +55,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
 input "type:pointer" {
     accel_profile flat
-        pointer_accel -0.28
+    pointer_accel -0.4
 }
 
 input "type:touchpad" {
@@ -64,7 +64,7 @@ input "type:touchpad" {
 
 input "type:keyboard" {
     xkb_layout us,ru 
-        xkb_options grp:alt_shift_toggle
+    xkb_options grp:alt_shift_toggle
 }
 
 ### Key bindings
@@ -227,13 +227,14 @@ include /etc/sway/config.d/*
     bar {
         position top
         status_command i3status_mod
+        #swaybar_command waybar
         }
 
 #Start GNOME keyring
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
 
 #auth agent
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 #audio constrols
 exec --no-startup-id pasystray
@@ -265,7 +266,7 @@ exec --no-startup-id brave
 exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id emacs --daemon
 exec --no-startup-id udiskie
-exec --no-startup-id $HOME/swhkd.sh 
+exec --no-startup-id $HOME/.config/sway/swhkd.sh 
 exec --no-startup-id swaybg -i ~/Pictures/1671442087827629.jpg
 exec --no-startup-id dunst
 exec --no-startup-id waybar
