@@ -29,11 +29,16 @@ def flatlist [] = { flatpak list | lines | split column -r '	' | rename name id 
 
 ### Startup commands ###
 if (which tmux | not-empty) and ($env.TERM !~ "screen|tmux") {
-    let last_session = tmux ls | lines | parse -r '(?<name>\d+)(?:.(?!ttached))*(?<status>(?<=\()attached)?' | last
-    if ($last_session.status != "attached") {
-        exec tmux attach-session -t $last_session.name
-        } else {
-        exec tmux
-    }
+  let last_session = ^tmux ls 
+    | lines
+    | parse "{name}: {windows} windows (created {date}){attached}"
+    | last
+    
+  if ($last_session | is-empty) { exec tmux }
+
+  if ($last_session.attached == "") {
+      exec tmux attach-session -t $last_session.name
+  }
+  exec tmux
 }
 
