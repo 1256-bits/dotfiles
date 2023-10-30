@@ -18,7 +18,7 @@ font pango:Jetbrains Mono 8
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg ~/Pictures/1671442087827629.jpg fill
 #
 # Example configuration:
 #
@@ -252,9 +252,9 @@ for_window [title="SwiftRead"] fullscreen enable
 assign [class="discord"] 10
 assign [class="steam"] 3
 assign [class="Brave"] 2
-assign [class="Zathura"] 4
+assign [app_id="org.pwmt.zathura"] 4
 assign [class="MuPDF"] 4
-assign [class="Com.github.johnfactotum.Foliate"] 4
+assign [app_id="Com.github.johnfactotum.Foliate"] 4
 
 #misc
 exec --no-startup-id qbittorrent
@@ -269,5 +269,4 @@ exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id emacs --daemon
 exec --no-startup-id udiskie
 exec --no-startup-id $HOME/.config/sway/swhkd.sh 
-exec --no-startup-id swaybg -i ~/Pictures/1671442087827629.jpg
 exec --no-startup-id dunst
