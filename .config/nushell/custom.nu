@@ -16,7 +16,7 @@ alias lf = lfrun
 
 alias D = DRI_PRIME=1
 alias mv = mv -iv
-alias cp = cp -iuv
+alias cp = cp -iv
 
 
 ### Custom functions ###
@@ -26,6 +26,27 @@ def not-empty [] { not ($in | is-empty) }
 # List installed flatpaks in a table
 def flatlist [] = { flatpak list | lines | split column -r '	' | rename name id version branch installation }
 
+# Launch bash shell with nvm loaded
+# REPLACE WITH FNM
+def nvm-shell [] {
+    'export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion'
+    | save -f /tmp/nvm-bashrc
+    bash -rcfile /tmp/nvm-bashrc
+    rm /tmp/nvm-bashrc
+}
+
+# df -h in nushell table format
+def df [] {
+  ^df -h | lines | drop nth 0 | split column -r '\s+' | rename Filesystem Size Used Avail Use% "Mounted on"
+}
+
+# Cd to one of the currently mounted media devices
+def-env media [] {
+  let media_dir = ls -s $"/run/media/($env.USER)/" | get name | input list
+  cd $"/run/media/($env.USER)/($media_dir)/"
+}
 
 ### Startup commands ###
 if (which tmux | not-empty) and ($env.TERM !~ "screen|tmux") {
