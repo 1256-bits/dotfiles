@@ -18,7 +18,7 @@ font pango:Jetbrains Mono 8
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Pictures/cf66681434f3deeb9df462b9115bcbc8.jpg fit
+output * bg ~/Pictures/bd0f92d3fe5ce402ef85ff165569ebf4.png fill
 #
 # Example configuration:
 #
