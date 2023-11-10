@@ -180,7 +180,7 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secr
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 #Start sxhkd
-exec_always --no-startup-id /usr/bin/sxhkd -a Escape
+exec_always --no-startup-id ~/.config/sway/swhkd.sh
 
 #Add wallpaper
 exec --no-startup-id nitrogen --restore
@@ -226,3 +226,4 @@ exec --no-startup-id brave
 exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id emacs --daemon
 exec --no-startup-id udiskie
+exec --no-startup-id cat_checker
