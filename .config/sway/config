@@ -232,6 +232,8 @@ include /etc/sway/config.d/*
         #swaybar_command waybar
         }
 
+bindsym Print exec slurp | grim -g - - | wl-copy
+
 #Start GNOME keyring
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
 
@@ -255,6 +257,7 @@ assign [class="Brave"] 2
 assign [app_id="org.pwmt.zathura"] 4
 assign [class="MuPDF"] 4
 assign [app_id="Com.github.johnfactotum.Foliate"] 4
+assign [class="Emacs"] 3
 
 #misc
 exec --no-startup-id qbittorrent
