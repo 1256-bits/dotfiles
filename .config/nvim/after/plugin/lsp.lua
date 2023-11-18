@@ -20,7 +20,7 @@ lsp.ensure_installed({
     'pylsp',
 })
 -- (Optional) Configure lua language server for neovim
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.setup()
 
@@ -71,7 +71,7 @@ lspconfig.emmet_ls.setup({
     }
 })
 
-require 'lspconfig'.pylsp.setup {
+lspconfig.pylsp.setup {
     settings = {
         pylsp = {
             plugins = {
