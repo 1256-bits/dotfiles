@@ -43,7 +43,7 @@ def df [] {
 }
 
 # Cd to one of the currently mounted media devices
-def-env media [] {
+def --env media [] {
   let media_dir = ls -s $"/run/media/($env.USER)/" | get name | input list
   cd $"/run/media/($env.USER)/($media_dir)/"
 }
