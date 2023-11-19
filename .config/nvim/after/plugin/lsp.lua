@@ -9,6 +9,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.ensure_installed({
+    'lua_ls',
     'bashls',
     'tsserver',
     'emmet_ls',
