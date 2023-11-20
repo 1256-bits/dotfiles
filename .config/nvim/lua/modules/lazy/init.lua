@@ -12,33 +12,42 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  'kovetskiy/sxhkd-vim',
-  'VonHeikemen/lsp-zero.nvim',
-  'ThePrimeagen/harpoon',
-  'mbbill/undotree',
-  'hrsh7th/cmp-path',
-  'saadparwaiz1/cmp_luasnip',
-  'hrsh7th/cmp-buffer',
-  'tpope/vim-fugitive',
-  'shaunsingh/nord.nvim',
-  'EdenEast/nightfox.nvim',
-  'mfussenegger/nvim-dap',
-  'LhKipp/nvim-nu',
+  {
+    "kovetskiy/sxhkd-vim",
+    lazy = true,
+  },
+  "VonHeikemen/lsp-zero.nvim",
+  "ThePrimeagen/harpoon",
+  "mbbill/undotree",
+  "hrsh7th/cmp-path",
+  "saadparwaiz1/cmp_luasnip",
+  "hrsh7th/cmp-buffer",
+  "tpope/vim-fugitive",
+  {
+    "shaunsingh/nord.nvim",
+    lazy = true,
+  },
+  "EdenEast/nightfox.nvim",
+  "mfussenegger/nvim-dap",
+  {
+    "LhKipp/nvim-nu",
+    lazy = true,
+  },
   "dstein64/vim-startuptime",
   "mattn/efm-langserver",
   {
-    'creativenull/efmls-configs-nvim',
-    version = 'v1.x.x', -- version is optional, but recommended
-    dependencies = { 'neovim/nvim-lspconfig' },
+    "creativenull/efmls-configs-nvim",
+    version = "v1.x.x", -- version is optional, but recommended
+    dependencies = { "neovim/nvim-lspconfig" },
   },
   {
-    'rcarriga/nvim-dap-ui',
-    dependencies = { 'mfussenegger/nvim-dap' }
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap" },
   },
   {
-    'mcchrish/zenbones.nvim',
+    "mcchrish/zenbones.nvim",
     lazy = true,
-    dependencies = { 'rktjmp/lush.nvim' }
+    dependencies = { "rktjmp/lush.nvim" },
   },
   {
     "kylechui/nvim-surround",
@@ -48,35 +57,35 @@ local plugins = {
       require("nvim-surround").setup({
         -- Configuration here, or leave empty to use defaults
       })
-    end
+    end,
   },
   {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.4',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.4",
+    dependencies = { "nvim-lua/plenary.nvim" },
   },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
+    "VonHeikemen/lsp-zero.nvim",
+    branch = "v2.x",
     dependencies = {
       -- LSP Support
-      { 'neovim/nvim-lspconfig' }, -- Required
+      { "neovim/nvim-lspconfig" }, -- Required
       {
         -- Optional
-        'williamboman/mason.nvim',
+        "williamboman/mason.nvim",
         build = function()
-          pcall(vim.cmd, 'MasonUpdate')
+          pcall(vim.cmd, "MasonUpdate")
         end,
       },
-      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+      { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
       -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },     -- Required
-      { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-      { 'L3MON4D3/LuaSnip' },     -- Required
-    }
-  }
+      { "hrsh7th/nvim-cmp" },  -- Required
+      { "hrsh7th/cmp-nvim-lsp" }, -- Required
+      { "L3MON4D3/LuaSnip" },  -- Required
+    },
+  },
 }
 
 local opts = {}
