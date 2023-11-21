@@ -6,6 +6,5 @@ case "$1" in
 "stat") $DOTFS status ;;
 "add") $DOTFS add "$([ -n "$2" ] && echo "$2" || $DOTFS status | grep modified | awk '{print $2}' | fzf)" ;;
 "com") $DOTFS commit -m "$2" ;;
-"push") $DOTFS push ;;
 *) $DOTFS "$@" ;;
 esac
