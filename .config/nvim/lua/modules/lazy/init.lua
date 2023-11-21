@@ -12,10 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  {
-    "kovetskiy/sxhkd-vim",
-    lazy = true,
-  },
+  "kovetskiy/sxhkd-vim",
   "VonHeikemen/lsp-zero.nvim",
   "ThePrimeagen/harpoon",
   "mbbill/undotree",
@@ -29,10 +26,7 @@ local plugins = {
   },
   "EdenEast/nightfox.nvim",
   "mfussenegger/nvim-dap",
-  {
-    "LhKipp/nvim-nu",
-    lazy = true,
-  },
+  "LhKipp/nvim-nu",
   "dstein64/vim-startuptime",
   "mattn/efm-langserver",
   {
