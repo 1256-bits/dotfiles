@@ -1,9 +1,11 @@
 local languages = require("efmls-configs.defaults").languages()
 local shfmt = require("efmls-configs.formatters.shfmt")
 local fnlfmt = require("efmls-configs.formatters.fnlfmt")
+local prettier = require("efmls-configs.formatters.prettier")
 languages = vim.tbl_extend("force", languages, {
   sh = { shfmt },
   python = {},
+  javascript = { prettier },
   fennel = { fnlfmt },
 })
 
