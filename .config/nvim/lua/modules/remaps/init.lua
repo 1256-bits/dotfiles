@@ -24,7 +24,6 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>f", function(bufnr)
   vim.lsp.buf.format({
     filter = function(client)
-      print(client.name)
       if vim.bo.filetype == "typescript" or vim.bo.filetype == "javascript" then
         return client.name == "efm"
       else
