@@ -21,16 +21,16 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
 
-vim.keymap.set("n", "<leader>f", function(bufnr)
+vim.keymap.set("n", "<leader>f", function()
   vim.lsp.buf.format({
     filter = function(client)
       if vim.bo.filetype == "typescript" or vim.bo.filetype == "javascript" then
-        return client.name == "efm"
+        return client.name ~= "efm"
       else
         return true
       end
     end,
-    bufnr = bufnr,
+    timeout_ms = 2000,
   })
 end)
 
