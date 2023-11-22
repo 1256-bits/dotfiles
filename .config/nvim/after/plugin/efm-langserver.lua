@@ -6,6 +6,7 @@ languages = vim.tbl_extend("force", languages, {
   sh = { shfmt },
   python = {},
   javascript = { prettier },
+  typescript = { prettier },
   fennel = { fnlfmt },
 })
 
