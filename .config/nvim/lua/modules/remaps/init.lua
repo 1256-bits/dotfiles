@@ -21,7 +21,19 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
 
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>f", function(bufnr)
+  vim.lsp.buf.format({
+    filter = function(client)
+      print(client.name)
+      if vim.bo.filetype == "typescript" or vim.bo.filetype == "javascript" then
+        return client.name == "efm"
+      else
+        return true
+      end
+    end,
+    bufnr = bufnr,
+  })
+end)
 
 vim.keymap.set("n", "<leader>s", [[:%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
@@ -33,5 +45,5 @@ end)
 vim.keymap.set("n", "<leader>w", "<C-W>")
 
 vim.keymap.set({ "n", "v" }, "<leader>gg", function()
-  vim.cmd('G push')
+  vim.cmd("G push")
 end)
