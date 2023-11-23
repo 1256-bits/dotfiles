@@ -23,15 +23,16 @@ vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "<leader>f", function()
   vim.lsp.buf.format({
+    --[[
     filter = function(client)
-      if vim.bo.filetype == "typescript" or vim.bo.filetype == "javascript" then
-        return client.name ~= "efm"
+      if false and vim.bo.filetype == "typescript" or vim.bo.filetype == "javascript" then
+        return client.name == "efm"
       else
         return true
       end
     end,
     timeout_ms = 2000,
-  })
+  ]]})
 end)
 
 vim.keymap.set("n", "<leader>s", [[:%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]])

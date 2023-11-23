@@ -5,8 +5,8 @@ local prettier = require("efmls-configs.formatters.prettier")
 languages = vim.tbl_extend("force", languages, {
   sh = { shfmt },
   python = {},
-  javascript = { prettier },
-  typescript = { prettier },
+  javascript = {},
+  typescript = {},
   fennel = { fnlfmt },
 })
 

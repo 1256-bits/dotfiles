@@ -87,4 +87,20 @@ lspconfig.pylsp.setup({
   },
 })
 
+lspconfig.tsserver.setup({
+  init_options = {
+    preferences = {
+      quotePreference = 'single',
+    },
+  },
+  settings = {
+    typescript = {
+      format = {
+        semicolons = "remove",
+        insertSpaceBeforeFunctionParenthesis = true,
+      },
+    },
+  },
+})
+
 lsp.setup()
