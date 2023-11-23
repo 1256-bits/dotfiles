@@ -98,6 +98,7 @@ lspconfig.tsserver.setup({
       format = {
         semicolons = "remove",
         insertSpaceBeforeFunctionParenthesis = true,
+        insertSpaceAfterConstructor = true,
       },
     },
   },
