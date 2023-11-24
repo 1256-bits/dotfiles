@@ -173,6 +173,8 @@ bar {
         status_command i3status_mod
 }
 
+bindsym Print exec maim -u ~/Pictures/maim-$(date +%s).png
+bindsym Shift+Print exec maim -su ~/Pictures/maim-$(date +%s).png
 #Start GNOME keyring
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
 
