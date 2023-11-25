@@ -266,7 +266,6 @@ smart_gaps on
 gaps outer 0
 exec --no-startup-id syncthing --no-browser
 exec --no-startup-id /usr/lib/kdeconnectd
-exec --no-startup-id discord
 exec --no-startup-id brave
 exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id emacs --daemon
