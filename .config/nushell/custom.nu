@@ -18,13 +18,23 @@ alias D = DRI_PRIME=1
 alias mv = mv -iv
 alias cp = cp -iv
 
-
 ### Custom functions ###
 
 # Check if a pipeline input isn't empty
 def not-empty [] { not ($in | is-empty) }
 # List installed flatpaks in a table
 def flatlist [] = { flatpak list | lines | split column -r '	' | rename name id version branch installation }
+
+# Rename a file to it's md5 hash
+def md5-rename [] {
+  let input = $in 
+  let name = $input | split row "." | drop | reverse | reduce {|$a, $b| ($a | into string) + ($b | into string)}
+  let extension = $input | split row "." | last | into string
+  open $input | hash md5 | mv $input $"($in).($extension)"
+}
+
+alias md5-each = each {|$file| $file | md5-rename} # can't put it in aliases because it references a custom command. Hoisting?
+
 
 # Launch bash shell with nvm loaded
 # REPLACE WITH FNM
