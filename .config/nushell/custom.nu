@@ -25,16 +25,15 @@ def not-empty [] { not ($in | is-empty) }
 # List installed flatpaks in a table
 def flatlist [] = { flatpak list | lines | split column -r '	' | rename name id version branch installation }
 
-# Rename a file to it's md5 hash
-def md5-rename [] {
-  let input = $in 
-  let name = $input | split row "." | drop | reverse | reduce {|$a, $b| ($a | into string) + ($b | into string)}
-  let extension = $input | split row "." | last | into string
-  open $input | hash md5 | mv $input $"($in).($extension)"
+# Rename files to their md5 hash
+def md5-rename [glob] {
+  glob $glob | each {|$input|
+    let file = $input | path basename
+    let name = $file | split row "." | drop | reverse | reduce {|$a, $b| ($a | into string) + ($b | into string)}
+    let extension = $file | split row "." | last | into string
+    open $file | hash md5 | mv $file $"($in).($extension)"
+  }
 }
-
-alias md5-each = each {|$file| $file | md5-rename} # can't put it in aliases because it references a custom command. Hoisting?
-
 
 # Launch bash shell with nvm loaded
 # REPLACE WITH FNM
