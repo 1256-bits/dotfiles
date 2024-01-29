@@ -2,6 +2,6 @@
 
 if [[ ! -e "$1" ]]; then
 	echo "File $1 does not exist"
-	return
+	exit
 fi
 xdg-open "$1" 2> /dev/null & disown
