@@ -215,6 +215,7 @@ assign [class="Zathura"] 4
 assign [class="MuPDF"] 4
 assign [class="Com.github.johnfactotum.Foliate"] 4
 assign [class="Emacs"] 3
+assign [class="KOReader"] 4
 
 #misc
 exec --no-startup-id qbittorrent
@@ -230,3 +231,7 @@ exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id emacs --daemon
 exec --no-startup-id udiskie
 exec --no-startup-id cat_checker
+
+# tmp
+assign [class="libreoffice"] 3
+assign [class="Tor Browser"] 4
