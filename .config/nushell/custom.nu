@@ -48,7 +48,7 @@ def nvm-shell [] {
 
 # df -h in nushell table format
 def df [] {
-  ^df -h | lines | drop nth 0 | split column -r '\s+' | rename Filesystem Size Used Avail Use% "Mounted on"
+  ^df -h | lines | drop nth 0 | split column -r '\s+' | rename Filesystem Size Used Avail Use% Path
 }
 
 # Cd to one of the currently mounted media devices
