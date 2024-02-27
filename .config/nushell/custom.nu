@@ -53,8 +53,9 @@ def df [] {
 
 # Cd to one of the currently mounted media devices
 def --env media [] {
-  let media_dir = ls -s $"/run/media/($env.USER)/" | get name | input list
-  cd $"/run/media/($env.USER)/($media_dir)/"
+  let media_dir = df | where Path =~ $'/run/media/($env.USER)' | select Filesystem Avail Use% Path
+  let index = $media_dir | each {|$rec| $"($rec | get Filesystem)    ($rec | get Avail)    ($rec | get Use%)"} | input list -i "  Filesystem  Avail  Use%"
+  $media_dir | get $index | get Path | cd $in
 }
 
 ### Startup commands ###
