@@ -255,6 +255,7 @@ for_window [app_id="org.kde.kdeconnect.daemon"] floating enable
 assign [class="discord"] 10
 assign [class="steam"] 3
 assign [class="Brave"] 2
+assign [app_id="brave-browser"] 2
 assign [app_id="org.pwmt.zathura"] 4
 assign [class="MuPDF"] 4
 assign [app_id="Com.github.johnfactotum.Foliate"] 4
