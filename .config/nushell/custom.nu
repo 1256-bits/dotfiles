@@ -59,7 +59,7 @@ def --env media [] {
 }
 
 ### Startup commands ###
-if (which tmux | not-empty) and ($env.TERM !~ "screen|tmux") {
+if ($env.TERM != eterm-color) and (which tmux | not-empty) and ($env.TERM !~ "screen|tmux") {
   let last_session = ^tmux ls 
     | lines
     | parse "{name}: {windows} windows (created {date}){attached}"
