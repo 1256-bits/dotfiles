@@ -33,8 +33,8 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
-(setq doom-font (font-spec :family "JetBrains Mono" :size 14)
-      doom-variable-pitch-font (font-spec :family "NotoSans" :size 15)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 18)
+      doom-variable-pitch-font (font-spec :family "NotoSans" :size 19)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-italic t)
@@ -112,24 +112,24 @@
 (map! :leader "r t r" #'org-roam-tag-remove)
 ;;Org roam ui
 (use-package! websocket
-    :after org-roam)
+  :after org-roam)
 (use-package! org-roam-ui
-    :after org-roam ;; or :after org
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+  :after org-roam ;; or :after org
+  ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+  ;;         a hookable mode anymore, you're advised to pick something yourself
+  ;;         if you don't care about startup time, use
+  ;;  :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
 ;;Transclusion
 (use-package! org-transclusion
-              :after org
-              :init
-              (map! :leader "t a" #'org-transclusion-add)
-              (org-transclusion-mode t))
+  :after org
+  :init
+  (map! :leader "t a" #'org-transclusion-add)
+  (org-transclusion-mode t))
 (after! org-roam
   (setq org-roam-db-extra-links-exclude-keys
         '((node-property "ROAM_REFS")))
