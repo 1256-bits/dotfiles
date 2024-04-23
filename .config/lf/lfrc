@@ -1,4 +1,48 @@
 set ratios 1:2:3
 set cleaner ~/.config/lf/cleaner
 set relativenumber
+
+map Z z
+
+# Doesn't work on waynand
 set previewer ~/.config/lf/preview
+
+# Functions
+cmd z %{{
+  if [[ -z $* ]]; then
+    printf "z: "
+    read -r dest
+  else
+    dest=$*
+  fi
+    result="$(zoxide query --exclude $PWD $dest | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+
+cmd zi ${{
+  result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+  lf -remote "send $id cd \"$result\""
+}}
+
+cmd on-cd &{{
+  zoxide add "$PWD"
+}}
+
+cmd mkdir %{{
+  printf "New directory: "
+  read -r dirname
+  mkdir "$dirname"
+}}
+
+cmd mcm-dir ${{
+  # Grabs currently selected file
+  # Cut's off the extension and pastes it's name into readline
+  # Creates a folder with the resulting filename
+  # Moves the selected file to the new folder
+  basename="$(basename "${f%.*}")"
+  read -r -e -i "$basename" name
+  if [ -n "$name" ]; then
+    mkdir "$name"
+    mv -n "$f" "$name"
+  fi
+}}
