@@ -156,18 +156,23 @@
   (org-insert-time-stamp (org-current-time) nil t))
 
 (defun timestamp-no-date (timestamp)
+  ;; Takes in (decode-time) or a list (sec min hour) and produces a formatted string HH:MM:SS
   (let ((hours (time-to-fixed-xx (caddr timestamp)))
         (minutes (time-to-fixed-xx (cadr timestamp)))
         (seconds (time-to-fixed-xx (car timestamp))))
     (format "%s:%s:%s" hours minutes seconds)))
 
 (defun time-to-fixed-xx (time)
+  ;; Converts number to a string and formats it to XX format
   (if (>= time 10) (prin1-to-string time)
     (concat "0" (prin1-to-string time)))
   )
 
 
 (defun org-timestamp-nd-formatted (&optional no-brackets style)
+  ;; Inserts a [HH:MM:SS] timestamp with no date at point
+  ;; no-brackets removes brackets.
+  ;; Styles: bold, italic, verbatium, nil
   (interactive)
   (let ((timestamp (timestamp-no-date (decode-time)))
         (surround (cond ((equal style "bold") "*")
