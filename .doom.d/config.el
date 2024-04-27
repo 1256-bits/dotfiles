@@ -8,6 +8,7 @@
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "John Doe"
       user-mail-address "john@doe.com")
+(setq shell-file-name "/bin/bash")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
