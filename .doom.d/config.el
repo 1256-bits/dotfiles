@@ -150,9 +150,10 @@
   (insert (concat "#+BEGIN_SRC " (read-string "Language: ") "\n" "\n#+END_SRC"))
   (forward-line -1))
 
-(defun org-current-timestamp ()
+(defun org-inactive-timestamp ()
+  ;; Creates inactive timestamp at point
   (interactive)
-  (org-insert-time-stamp (org-current-time) t t))
+  (org-insert-time-stamp (org-current-time) nil t))
 
 (defun timestamp-no-date (timestamp)
   (let ((hours (time-to-fixed-xx (caddr timestamp)))
