@@ -86,6 +86,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;;Keybinds
+(map! :leader "t s" (lambda () (interactive)(org-timestamp-nd-formatted nil "verbatium")))
+
 ;;Harpoon
 (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
 (map! :n "C-s" 'harpoon-add-file)
@@ -145,3 +148,25 @@
     (newline))
   (insert (concat "#+BEGIN_SRC " (read-string "Language: ") "\n" "\n#+END_SRC"))
   (forward-line -1))
+
+(defun org-current-timestamp ()
+  (interactive)
+  (org-insert-time-stamp (org-current-time) t t))
+
+(defun timestamp-no-date ()
+  (let ((hours (caddr (decode-time)))
+        (minutes (cadr (decode-time)))
+        (seconds (if (>= (car (decode-time)) 10) (prin1-to-string (car (decode-time)))
+                   (concat "0" (prin1-to-string (car (decode-time)))))))
+    (format "%d:%d:%s" hours minutes seconds)))
+
+(defun org-timestamp-nd-formatted (&optional no-brackets style)
+  (interactive)
+  (let ((timestamp (timestamp-no-date))
+        (surround (cond ((equal style "bold") "*")
+                        ((equal style "italic") "/")
+                        ((equal style "verbatium") "=")
+                        (t ""))))
+    (insert (if no-brackets (format "%s%s%s" surround timestamp surround)
+              (format "%s[%s]%s" surround timestamp surround))))
+  )
