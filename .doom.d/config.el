@@ -141,6 +141,7 @@
 (reverse-im-mode t)
 ;;custom elisp functions
 (defun org-insert-code-block ()
+  ;; Interactively ask for language and insert code block at point
   (interactive)
   (unless (or (equal " " (thing-at-point 'char t))
               (equal nil (thing-at-point 'char t)))
@@ -153,16 +154,21 @@
   (interactive)
   (org-insert-time-stamp (org-current-time) t t))
 
-(defun timestamp-no-date ()
-  (let ((hours (caddr (decode-time)))
-        (minutes (cadr (decode-time)))
-        (seconds (if (>= (car (decode-time)) 10) (prin1-to-string (car (decode-time)))
-                   (concat "0" (prin1-to-string (car (decode-time)))))))
-    (format "%d:%d:%s" hours minutes seconds)))
+(defun timestamp-no-date (timestamp)
+  (let ((hours (time-to-fixed-xx (caddr timestamp)))
+        (minutes (time-to-fixed-xx (cadr timestamp)))
+        (seconds (time-to-fixed-xx (car timestamp))))
+    (format "%s:%s:%s" hours minutes seconds)))
+
+(defun time-to-fixed-xx (time)
+  (if (>= time 10) (prin1-to-string time)
+    (concat "0" (prin1-to-string time)))
+  )
+
 
 (defun org-timestamp-nd-formatted (&optional no-brackets style)
   (interactive)
-  (let ((timestamp (timestamp-no-date))
+  (let ((timestamp (timestamp-no-date (decode-time)))
         (surround (cond ((equal style "bold") "*")
                         ((equal style "italic") "/")
                         ((equal style "verbatium") "=")
