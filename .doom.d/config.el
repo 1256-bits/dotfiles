@@ -88,7 +88,7 @@
 ;; they are implemented.
 
 ;;Keybinds
-(map! :leader "t s" (lambda () (interactive)(org-timestamp-nd-formatted nil "verbatium")))
+(map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
 
 ;;Harpoon
 (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
