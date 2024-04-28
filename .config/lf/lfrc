@@ -28,10 +28,14 @@ cmd on-cd &{{
   zoxide add "$PWD"
 }}
 
-cmd mkdir %{{
+cmd mkdir-int %{{
   printf "New directory: "
   read -r dirname
   mkdir "$dirname"
+}}
+
+cmd mkdir &{{
+  mkdir "$@"
 }}
 
 cmd mcm-dir ${{
