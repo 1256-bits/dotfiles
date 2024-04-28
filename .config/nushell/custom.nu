@@ -51,6 +51,11 @@ def df [] {
   ^df -h | lines | drop nth 0 | split column -r '\s+' | rename Filesystem Size Used Avail Use% Path
 }
 
+#cat a script in PATH
+def catscript [path] {
+  which $path | get path | to text | bat $in
+}
+
 # Cd to one of the currently mounted media devices
 def --env media [] {
   let media_dir = df | where Path =~ $'/run/media/($env.USER)' | select Filesystem Avail Use% Path
