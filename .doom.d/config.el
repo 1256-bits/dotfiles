@@ -139,7 +139,22 @@
         '((node-property "ROAM_REFS")))
   (setq org-roam-db-extra-links-elements '(keyword "transclude")))
 ;; reverse-im
-(reverse-im-mode t)
+;; Not sure what char-fold is for so leaving it commented out.
+;(use-package! char-fold
+;  :custom
+;  (char-fold-symmetric t)
+;  (search-default-mode #'char-fold-to-regexp))
+(use-package! reverse-im
+  :demand t ; always load it
+  ;:after char-fold ; but only after `char-fold' is loaded
+  :init
+  (map! :leader "f w" #'reverse-im-translate-word) ; fix a word in wrong layout
+  :custom
+  (reverse-im-char-fold t) ; use lax matching
+  (reverse-im-read-char-advice-function #'reverse-im-read-char-include)
+  (reverse-im-input-methods '("russian-computer")) ; translate these methods
+  :config
+  (reverse-im-mode t)) ; turn the mode on
 ;;custom elisp functions
 (defun org-insert-code-block ()
   ;; Interactively ask for language and insert code block at point
