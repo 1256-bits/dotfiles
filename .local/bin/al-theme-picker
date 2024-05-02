@@ -1,3 +1,5 @@
 #!/bin/sh
 THEME=$(ls ~/.config/alacritty/themes | fzf)
-[ $? -eq 0 ] && sed -i "$ d" ~/.config/alacritty/alacritty.yml && echo "  - ~/.config/alacritty/themes/$THEME" >> ~/.config/alacritty/alacritty.yml
+if [ $? -eq 0 ]; then
+     sed -i "1s/\".*\"/\"~\/.config\/alacritty\/themes\/${THEME}\"/" ~/.config/alacritty/alacritty.toml
+fi
