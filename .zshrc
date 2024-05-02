@@ -3,6 +3,8 @@ zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=* r:|=*'
 zstyle ':completion:*' max-errors 0 numeric
 zstyle :compinstall filename '/home/iris/.zshrc'
+eval "$(dircolors --sh)"
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 autoload -Uz compinit
 compinit
@@ -67,13 +69,13 @@ export PATH=~/.config/emacs/bin:$PATH
 export PATH=~/ani-cli/:$PATH
 
 #plugins
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source ~/.local/share/zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 eval "$(lua ~/z.lua/z.lua --init zsh)"
 alias rm="rm -v"
 alias lf="lfrun"
 alias yay="yay --sudoloop"
 #launch tmux on login
-if command -v tmux > /dev/null && [[ ! "$TERM" =~ tmux ]]; then
+if command -v tmux > /dev/null && [[ ! "$TERM" =~ tmux ]] && [ ! "$INSIDE_EMACS" ]; then
     exec tmux;
 fi
