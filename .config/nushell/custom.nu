@@ -6,6 +6,7 @@ alias yay = yay --sudoloop
 alias get-dirs = where type == "dir" or type == "symlink"
 alias get-files = where type == "file"
 alias eza = eza --group-directories-first --icons
+alias e = eza --group-directories-first --icons
 alias oldpwd = cd $env.OLDPWD
 
 alias vim = nvim
@@ -17,6 +18,28 @@ alias lf = lfrun
 alias D = DRI_PRIME=1
 alias mv = mv -iv
 alias cp = cp -iv
+
+let fish_completer = {|spans|
+    let is_record = $spans | describe | $in =~ list
+    if ($is_record) {
+      let unaliased = $spans | get 0 | unalias $in
+      let spans = $spans | skip | prepend $unaliased | str join " " | str trim
+      fish --command $'complete --do-complete="($spans)"'
+              | $"value(char tab)description(char newline)" + $in
+              | from tsv --flexible --no-infer | where value != $unaliased
+    } else {
+      let unaliased = $spans | str trim | unalias $in
+      fish --command $'complete --do-complete="($unaliased)"'
+            | $"value(char tab)description(char newline)" + $in
+            | from tsv --flexible --no-infer | where value != $unaliased
+    }
+}
+
+# $env.config.completions.external = {
+#     enable: false
+#     max_results: 100
+#     completer: $fish_completer
+# }
 
 ### Custom functions ###
 
@@ -56,12 +79,22 @@ def catscript [path] {
   which $path | get path | to text | bat $in
 }
 
+# Determine if a command is an alias and retrieve the actual command
+def unalias [command] {
+  if (which $command | get type | to text | $in == "alias") {
+    let unaliased = help $command | lines | get 0 | parse --regex "(?<name>(?<=`).*(?=`))" | get name.0
+    return $unaliased
+  }
+  return $command
+}
+
 # Cd to one of the currently mounted media devices
 def --env media [] {
   let media_dir = df | where Path =~ $'/run/media/($env.USER)' | select Filesystem Avail Use% Path
   let index = $media_dir | each {|$rec| $"($rec | get Filesystem)    ($rec | get Avail)    ($rec | get Use%)"} | input list -i "  Filesystem  Avail  Use%"
   $media_dir | get $index | get Path | cd $in
 }
+
 
 ### Startup commands ###
 if ($env.TERM != eterm-color) and (which tmux | not-empty) and ($env.TERM !~ "screen|tmux") {
