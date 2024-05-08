@@ -85,5 +85,6 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend $mypath)
 $env.EDITOR = nvim
 $env.VISUAL = nvim
 $env.BUN_INSTALL = $"($env.HOME)/.bun"
+$env.BROWSER = "librewolf"
 
 zoxide init nushell | save -f ~/.zoxide.nu
