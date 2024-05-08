@@ -14,6 +14,7 @@ set $term alacritty
 # on the original workspace that the command was run on.
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 font pango:Jetbrains Mono 8
+set $browser "librewolf"
 
 ### Output configuration
 #
@@ -251,12 +252,16 @@ for_window [title="SwiftRead"] floating enable
 for_window [title="SwiftRead"] fullscreen enable
 for_window [title="Open Files"] floating enable
 for_window [app_id="org.kde.kdeconnect.daemon"] floating enable
+for_window [class="Tor Browser"] move scratchpad
+for_window [workspace="number 9"] layout tabbed
 
 #workspace assignment
 assign [class="discord"] 10
 assign [class="steam"] 3
 assign [class="Brave"] 2
 assign [app_id="brave-browser"] 2
+assign [app_id="LibreWolf"] 2
+assign [app_id="firefox"] 2
 assign [app_id="org.pwmt.zathura"] 4
 assign [class="MuPDF"] 4
 assign [app_id="Com.github.johnfactotum.Foliate"] 4
@@ -269,7 +274,10 @@ smart_gaps on
 gaps outer 0
 exec --no-startup-id syncthing --no-browser
 exec --no-startup-id /usr/lib/kdeconnectd
-exec --no-startup-id brave
+exec --no-startup-id $browser
+exec --no-startup-id $HOME/tor-browser/start-tor-browser.desktop
+exec --no-startup-id keepassxc
+exec --no-startup-id swaymsg 'workspace 9; layout tabbed; workspace 1'
 exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id emacs --daemon
 exec --no-startup-id udiskie
