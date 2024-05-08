@@ -87,10 +87,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;;Keybinds
+;;; Keybinds
+;; Insert " " because of evil mode
 (map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
 
-;;Harpoon
+;;; Harpoon
 (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
 (map! :n "C-s" 'harpoon-add-file)
 (map! :leader "j c" 'harpoon-clear)
@@ -104,17 +105,18 @@
 (map! :leader "7" 'harpoon-go-to-7)
 (map! :leader "8" 'harpoon-go-to-8)
 (map! :leader "9" 'harpoon-go-to-9)
-;;Org roam
+
+;;; Org roam
 (setq org-roam-directory (file-truename "~/Documents/roam"))
 (org-roam-db-autosync-mode)
 (add-hook! org-roam-mode (visual-line-mode))
-(map! :leader "r i" #'org-roam-node-insert)
+(map! :leader "r i" (lambda () (interactive)(evil-append 1)(org-roam-node-insert)(evil-normal-state)))
 (map! :leader "r f" #'org-roam-node-find)
 (map! :leader "r b" #'org-roam-buffer-toggle)
 (map! :leader "r e" #'org-roam-extract-subtree)
 (map! :leader "r t a" #'org-roam-tag-add)
 (map! :leader "r t r" #'org-roam-tag-remove)
-;;Org roam ui
+;; Org roam ui
 (use-package! websocket
   :after org-roam)
 (use-package! org-roam-ui
@@ -128,7 +130,8 @@
         org-roam-ui-follow t
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
-;;Transclusion
+
+;;; Transclusion
 (use-package! org-transclusion
   :after org
   :init
@@ -138,7 +141,8 @@
   (setq org-roam-db-extra-links-exclude-keys
         '((node-property "ROAM_REFS")))
   (setq org-roam-db-extra-links-elements '(keyword "transclude")))
-;; reverse-im
+
+;;; Reverse-im
 ;; Not sure what char-fold is for so leaving it commented out.
 ;(use-package! char-fold
 ;  :custom
@@ -155,9 +159,10 @@
   (reverse-im-input-methods '("russian-computer")) ; translate these methods
   :config
   (reverse-im-mode t)) ; turn the mode on
-;;custom elisp functions
+
+;;; Custom elisp functions
 (defun org-insert-code-block ()
-  ;; Interactively ask for language and insert code block at point
+  "Interactively ask for language and insert code block at point"
   (interactive)
   (unless (or (equal " " (thing-at-point 'char t))
               (equal nil (thing-at-point 'char t)))
@@ -167,28 +172,28 @@
   (forward-line -1))
 
 (defun org-inactive-timestamp ()
-  ;; Creates inactive timestamp at point
+  "Creates inactive timestamp at point"
   (interactive)
   (org-insert-time-stamp (org-current-time) nil t))
 
 (defun timestamp-no-date (timestamp)
-  ;; Takes in (decode-time) or a list (sec min hour) and produces a formatted string HH:MM:SS
+  "Takes in (decode-time) or a list (sec min hour).
+   Produces a formatted string HH:MM:SS"
   (let ((hours (time-to-fixed-xx (caddr timestamp)))
         (minutes (time-to-fixed-xx (cadr timestamp)))
         (seconds (time-to-fixed-xx (car timestamp))))
     (format "%s:%s:%s" hours minutes seconds)))
 
 (defun time-to-fixed-xx (time)
-  ;; Converts number to a string and formats it to XX format
+  "Converts number to a string and formats it to XX format"
   (if (>= time 10) (prin1-to-string time)
     (concat "0" (prin1-to-string time)))
   )
 
 
 (defun org-timestamp-nd-formatted (&optional no-brackets style)
-  ;; Inserts a [HH:MM:SS] timestamp with no date at point
-  ;; no-brackets removes brackets.
-  ;; Styles: bold, italic, verbatium, nil
+  "Inserts a [HH:MM:SS] timestamp with no date at point.
+  No-brackets removes brackets. Styles: bold, italic, verbatium, nil"
   (interactive)
   (let ((timestamp (timestamp-no-date (decode-time)))
         (surround (cond ((equal style "bold") "*")
