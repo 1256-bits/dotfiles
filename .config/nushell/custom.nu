@@ -19,22 +19,22 @@ alias D = DRI_PRIME=1
 alias mv = mv -iv
 alias cp = cp -iv
 
-let fish_completer = {|spans|
-    let is_record = $spans | describe | $in =~ list
-    if ($is_record) {
-      let unaliased = $spans | get 0 | unalias $in
-      let spans = $spans | skip | prepend $unaliased | str join " " | str trim
-      fish --command $'complete --do-complete="($spans)"'
-              | $"value(char tab)description(char newline)" + $in
-              | from tsv --flexible --no-infer | where value != $unaliased
-    } else {
-      let unaliased = $spans | str trim | unalias $in
-      fish --command $'complete --do-complete="($unaliased)"'
-            | $"value(char tab)description(char newline)" + $in
-            | from tsv --flexible --no-infer | where value != $unaliased
-    }
-}
-
+#let fish_completer = {|spans|
+#    let is_record = $spans | describe | $in =~ list
+#    if ($is_record) {
+#      let unaliased = $spans | get 0 | unalias $in
+#      let spans = $spans | skip | prepend $unaliased | str join " " | str trim
+#      fish --command $'complete --do-complete="($spans)"'
+#              | $"value(char tab)description(char newline)" + $in
+#              | from tsv --flexible --no-infer | where value != $unaliased
+#    } else {
+#      let unaliased = $spans | str trim | unalias $in
+#      fish --command $'complete --do-complete="($unaliased)"'
+#            | $"value(char tab)description(char newline)" + $in
+#            | from tsv --flexible --no-infer | where value != $unaliased
+#    }
+#}
+#
 # $env.config.completions.external = {
 #     enable: false
 #     max_results: 100
