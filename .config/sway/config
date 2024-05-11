@@ -65,7 +65,7 @@ input "type:touchpad" {
 
 input "type:keyboard" {
     xkb_layout us,ru 
-    xkb_options grp:alt_shift_toggle
+    xkb_options grp:alts_toggle,caps:ctrl_modifier
     xkb_variant altgr-intl
 }
 
@@ -266,6 +266,7 @@ assign [app_id="org.pwmt.zathura"] 4
 assign [class="MuPDF"] 4
 assign [app_id="Com.github.johnfactotum.Foliate"] 4
 assign [class="Emacs"] 3
+assign [app_id="org.keepassxc.KeePassXC"] 9
 
 #misc
 exec --no-startup-id qbittorrent
@@ -275,11 +276,12 @@ gaps outer 0
 exec --no-startup-id syncthing --no-browser
 exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id $browser
-exec --no-startup-id $HOME/tor-browser/start-tor-browser.desktop
+exec --no-startup-id $HOME/.config/sway/tor.sh
 exec --no-startup-id keepassxc
 exec --no-startup-id swaymsg 'workspace 9; layout tabbed; workspace 1'
 exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id emacs --daemon
+exec --no-startup-id emacsclient -c
 exec --no-startup-id udiskie
 exec --no-startup-id $HOME/.config/sway/swhkd.sh 
 exec --no-startup-id dunst
