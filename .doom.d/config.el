@@ -33,8 +33,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
-(setq doom-font (font-spec :family "JetBrains Mono" :size 18)
+(setq doom-theme 'modus-operandi)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 22)
       doom-variable-pitch-font (font-spec :family "NotoSans" :size 19)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
 (after! doom-themes
@@ -87,11 +87,14 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;;; Keybinds
+
+;; Keybinds
 ;; Insert " " because of evil mode
 (map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
+(map! :n "g z" #'zoxide-find-file)
 
-;;; Harpoon
+
+;; Harpoon
 (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
 (map! :n "C-s" 'harpoon-add-file)
 (map! :leader "j c" 'harpoon-clear)
@@ -106,16 +109,36 @@
 (map! :leader "8" 'harpoon-go-to-8)
 (map! :leader "9" 'harpoon-go-to-9)
 
-;;; Org roam
+
+;; Org roam
 (setq org-roam-directory (file-truename "~/Documents/roam"))
 (org-roam-db-autosync-mode)
 (add-hook! org-roam-mode (visual-line-mode))
-(map! :leader "r i" (lambda () (interactive)(evil-append 1)(org-roam-node-insert)(evil-normal-state)))
+
+;; Universal lookup bind
 (map! :leader "r f" #'org-roam-node-find)
-(map! :leader "r b" #'org-roam-buffer-toggle)
-(map! :leader "r e" #'org-roam-extract-subtree)
-(map! :leader "r t a" #'org-roam-tag-add)
-(map! :leader "r t r" #'org-roam-tag-remove)
+
+;; Roam-specific bind
+(map!
+ :leader "r i i"
+ (lambda () (interactive)(evil-append 1)(org-roam-node-insert)(evil-normal-state)))
+(map!
+ :leader "r i d"
+ (lambda () (interactive)(evil-append 1)(org-roam-node-insert-with-desc)(evil-normal-state)))
+(map!
+ :leader "r b" #'org-roam-buffer-toggle)
+(map!
+ :leader "r e" #'org-roam-extract-subtree)
+(map!
+ :leader "r t a" #'org-roam-tag-add)
+(map!
+ :leader "r t r" #'org-roam-tag-remove)
+(map!
+ :leader "r a a" #'org-roam-alias-add)
+(map!
+ :leader "r a r" #'org-roam-alias-remove)
+
+
 ;; Org roam ui
 (use-package! websocket
   :after org-roam)
@@ -131,7 +154,8 @@
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
 
-;;; Transclusion
+
+;; Transclusion
 (use-package! org-transclusion
   :after org
   :init
@@ -142,15 +166,15 @@
         '((node-property "ROAM_REFS")))
   (setq org-roam-db-extra-links-elements '(keyword "transclude")))
 
-;;; Reverse-im
-;; Not sure what char-fold is for so leaving it commented out.
-;(use-package! char-fold
-;  :custom
-;  (char-fold-symmetric t)
-;  (search-default-mode #'char-fold-to-regexp))
+
+;; Reverse-im
+(use-package! char-fold
+  :custom
+  (char-fold-symmetric t)
+  (search-default-mode #'char-fold-to-regexp))
 (use-package! reverse-im
   :demand t ; always load it
-  ;:after char-fold ; but only after `char-fold' is loaded
+  :after char-fold ; but only after `char-fold' is loaded
   :init
   (map! :leader "f w" #'reverse-im-translate-word) ; fix a word in wrong layout
   :custom
@@ -160,7 +184,8 @@
   :config
   (reverse-im-mode t)) ; turn the mode on
 
-;;; Custom elisp functions
+
+;; Custom elisp functions
 (defun org-insert-code-block ()
   "Interactively ask for language and insert code block at point"
   (interactive)
@@ -202,4 +227,14 @@
                         (t ""))))
     (insert (if no-brackets (format "%s%s%s" surround timestamp surround)
               (format "%s[%s]%s" surround timestamp surround))))
+  )
+
+(defun org-roam-node-insert-with-desc ()
+  (interactive)
+  (let (
+        (id (org-roam-node-id (org-roam-node-read)))
+        (description (read-string "Description:"))
+        )
+    (insert (concat "[[id:" id "][" description "]]"))
+    )
   )
