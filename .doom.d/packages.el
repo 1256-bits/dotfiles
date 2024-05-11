@@ -56,3 +56,5 @@
 (package! org-transclusion)
 (package! finito)
 (package! org-books)
+(package! zoxide)
+(package! undo-tree)
