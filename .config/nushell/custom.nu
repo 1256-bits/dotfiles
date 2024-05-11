@@ -88,6 +88,17 @@ def unalias [command] {
   return $command
 }
 
+# Formatted wc
+def wc [file?] {
+  let stdin = $in
+  let formatter = {|$input| $input | split row (char newline) | split column -c " " | rename lines words characters filename | print $in}
+  if ($stdin | not-empty) {
+    $stdin | ^wc -lwm | do $formatter $in
+    return
+  }
+  ^wc -lwm $file | do $formatter $in
+}
+
 # Cd to one of the currently mounted media devices
 def --env media [] {
   let media_dir = df | where Path =~ $'/run/media/($env.USER)' | select Filesystem Avail Use% Path
