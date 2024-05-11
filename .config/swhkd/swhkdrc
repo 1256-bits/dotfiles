@@ -1,5 +1,5 @@
 ctrl+alt+z
-	brave
+	$BROWSER
 super+d
 	discord
 super+alt+End
@@ -21,6 +21,6 @@ super+alt+h
 #super+p; t
 #	i3-gnome-pomodoro toggle
 #super+p; k
-	i3-gnome-pomodoro skip
+#	i3-gnome-pomodoro skip
 super+o
 	emacsclient -c
