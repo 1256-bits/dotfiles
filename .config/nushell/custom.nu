@@ -91,11 +91,12 @@ def unalias [command] {
 # Formatted wc
 def wc [file?] {
   let stdin = $in
-  let formatter = {|$input| $input | split row (char newline) | split column -c " " | rename lines words characters filename | print $in}
+  let formatter = {|$input| $input | split row (char newline) | split column -c " " | rename lines words characters filename}
   if ($stdin | not-empty) {
-    $stdin | ^wc -lwm | do $formatter $in
-    return
+    let result = $stdin | ^wc -lwm | do $formatter $in
+    return $result
   }
+  let file = $file | path expand
   ^wc -lwm $file | do $formatter $in
 }
 
