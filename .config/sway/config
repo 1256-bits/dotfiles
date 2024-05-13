@@ -283,7 +283,6 @@ exec --no-startup-id keepassxc
 exec --no-startup-id swaymsg 'workspace 9; layout tabbed; workspace 1'
 exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id emacs --daemon
-exec --no-startup-id emacsclient -c
 exec --no-startup-id udiskie
 exec --no-startup-id $HOME/.config/sway/swhkd.sh 
 exec --no-startup-id dunst
