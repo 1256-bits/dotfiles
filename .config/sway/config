@@ -265,6 +265,7 @@ assign [app_id="LibreWolf"] 2
 assign [app_id="firefox"] 2
 assign [app_id="org.pwmt.zathura"] 4
 assign [class="MuPDF"] 4
+assign [app_id="org.kde.okular"] 4
 assign [app_id="Com.github.johnfactotum.Foliate"] 4
 assign [class="Emacs"] 3
 assign [app_id="org.keepassxc.KeePassXC"] 9
