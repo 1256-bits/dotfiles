@@ -55,7 +55,7 @@ def md5-rename [glob] {
     let name = $file | split row "." | drop | reverse | reduce {|$a, $b| ($a | into string) + ($b | into string)}
     let extension = $file | split row "." | last | into string
     open $file | hash md5 | mv $file $"($in).($extension)"
-  }
+  } | ignore
 }
 
 # Launch bash shell with nvm loaded
