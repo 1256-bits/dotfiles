@@ -48,6 +48,26 @@ def not-empty [] { not ($in | is-empty) }
 # List installed flatpaks in a table
 def flatlist [] = { flatpak list | lines | split column -r '	' | rename name id version branch installation }
 
+# Search and install flatpaks
+def flatsearch [appname] = {
+  let cmd_output = flatpak search $appname 
+  if ($cmd_output | is-empty) {
+    print $'($appname) not found)'
+    return
+  }
+  let flatpaks = $cmd_output | lines | split column (char tab) | rename Name Description "Application ID" Version Branch Remotes | update Description {|row| $row.Description | str substring 0..60}
+    print $flatpaks
+  print $"i - install(char tab)q - cancel"
+  while (true) {
+    let char = input listen
+    if ($char.code == "i") {
+      $flatpaks | input list -fd "Name" | flatpak install -y $in.Remotes $in.'Application ID'
+    } else if ($char.code == "q") {
+      return
+    }
+  }
+}
+
 # Rename files to their md5 hash
 def md5-rename [glob] {
   glob $glob | each {|$input|
