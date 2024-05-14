@@ -254,7 +254,7 @@ for_window [title="Open Files"] floating enable
 for_window [app_id="org.kde.kdeconnect.daemon"] floating enable
 for_window [class="Tor Browser"] move scratchpad
 for_window [workspace="number 9"] layout tabbed
-for_window [title="Unlock database"] move workspace 2
+for_window [app_id="org.keepassxc.KeePassXC" floating] move container to workspace current
 
 #workspace assignment
 assign [class="discord"] 10
