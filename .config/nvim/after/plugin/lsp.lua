@@ -8,7 +8,9 @@ lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps({ buffer = bufnr })
 end)
 
-lsp.ensure_installed({
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {
   "lua_ls",
   "bashls",
   "tsserver",
@@ -19,11 +21,15 @@ lsp.ensure_installed({
   "cssmodules_ls",
   "fennel_language_server",
   "pylsp",
+},
+  handlers = {
+    lsp.default_setup,
+    lua_ls = function()
+      local lua_opts = lsp.nvim_lua_ls()
+      lspconfig.lua_ls.setup(lua_opts)
+    end,
+  },
 })
--- (Optional) Configure lua language server for neovim
-lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-
-lsp.setup()
 
 --Set up completion
 
@@ -35,8 +41,8 @@ cmp.setup({
     { name = "luasnip" },
   },
   mapping = {
-    ["<C-n"] = cmp.mapping.select_next_item(),
-    ["<C-p"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
   },
 })
 
