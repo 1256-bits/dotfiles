@@ -57,4 +57,4 @@
 (package! zoxide)
 (package! undo-tree)
 (package! xah-fly-keys)
-(package! edts)
+(package! edts) ; Needs manual build!

@@ -96,6 +96,9 @@
 (global-undo-tree-mode)
 (undo-tree-mode t)
 
+(after! erlang
+  (require 'edts-start))
+
 ;; Harpoon
 (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
 (map! :n "C-s" 'harpoon-add-file)
