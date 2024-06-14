@@ -93,6 +93,8 @@
 (map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
 (map! :n "g z" #'zoxide-find-file)
 
+(global-undo-tree-mode)
+(undo-tree-mode t)
 
 ;; Harpoon
 (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
