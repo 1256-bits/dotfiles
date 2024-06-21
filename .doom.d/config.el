@@ -92,6 +92,7 @@
 ;; Insert " " because of evil mode
 (map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
 (map! :n "g z" #'zoxide-find-file)
+(map! :leader "o x" #'org-scratch)
 
 (global-undo-tree-mode)
 (undo-tree-mode t)
