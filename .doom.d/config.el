@@ -250,6 +250,6 @@
 (defun org-scratch ()
   "Creates or switches to *org-scratch* buffer"
   (interactive)
-  (let ((buffer (generate-new-buffer (concat "*org-scratch*"))))
+  (let ((buffer (get-buffer-create "*org-scratch*")))
     (with-current-buffer buffer (org-mode))
     (set-window-buffer nil buffer)))
