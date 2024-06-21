@@ -895,3 +895,4 @@ $env.config = {
 }
 
 source ~/.zoxide.nu
+source custom.nu
