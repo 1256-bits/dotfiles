@@ -235,6 +235,8 @@
   )
 
 (defun org-roam-node-insert-with-desc ()
+  "Looks up a roam node and inserts the link with specified description.
+   The description is specified via prompt."
   (interactive)
   (let (
         (id (org-roam-node-id (org-roam-node-read)))
@@ -243,3 +245,10 @@
     (insert (concat "[[id:" id "][" description "]]"))
     )
   )
+
+(defun org-scratch ()
+  "Creates or switches to *org-scratch* buffer"
+  (interactive)
+  (let ((buffer (generate-new-buffer (concat "*org-scratch*"))))
+    (with-current-buffer buffer (org-mode))
+    (set-window-buffer nil buffer)))
