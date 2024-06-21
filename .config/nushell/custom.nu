@@ -61,7 +61,7 @@ def flatsearch [appname] = {
   while (true) {
     let char = input listen
     if ($char.code == "i") {
-      $flatpaks | input list -fd "Name" | flatpak install -y $in.Remotes $in.'Application ID'
+      $flatpaks | input list -fd "Name" | flatpak install -y $in.Remotes $in."Application ID"
     } else if ($char.code == "q") {
       return
     }
@@ -129,17 +129,18 @@ def --env media [] {
 
 
 ### Startup commands ###
-if ($env.TERM != eterm-color) and (which tmux | not-empty) and ($env.TERM !~ "screen|tmux") {
+if ($env.TERM != eterm-color) and (which tmux | not-empty) and ($env.TERM !~ 'screen|tmux') {
+  if (^tmux ls | is-empty) {
+    exec tmux
+  } 
   let last_session = ^tmux ls 
     | lines
     | parse "{name}: {windows} windows (created {date}){attached}"
     | last
-    
-  if ($last_session | is-empty) { exec tmux }
 
-  if ($last_session.attached == "") {
+    if ($last_session.attached == "") {
       exec tmux attach-session -t $last_session.name
-  }
+    }
   exec tmux
 }
 
