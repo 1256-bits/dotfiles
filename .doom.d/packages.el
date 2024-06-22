@@ -58,3 +58,4 @@
 (package! undo-tree)
 (package! xah-fly-keys)
 (package! edts) ; Needs manual build!
+(package! spray)

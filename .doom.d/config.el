@@ -93,12 +93,20 @@
 (map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
 (map! :n "g z" #'zoxide-find-file)
 (map! :leader "o x" #'org-scratch)
+(map! :leader "SPC" (lambda () (interactive)
+                      (if (equal (projectile-project-p) (concat (substitute-env-vars "$HOME") "/"))
+                          (princ "Root is $HOME, ignore")
+                        (projectile-find-file))))
 
 (global-undo-tree-mode)
 (undo-tree-mode t)
 
 (after! erlang
   (require 'edts-start))
+
+;; Spray mode
+
+(setq spray-height 250)
 
 ;; Harpoon
 (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
