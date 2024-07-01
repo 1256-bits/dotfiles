@@ -87,12 +87,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-
 ;; Keybinds
 ;; Insert " " because of evil mode
 (map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
 (map! :n "g z" #'zoxide-find-file)
-(map! :leader "o x" #'org-scratch)
+(map! :leader "o x" #'flexible-scratch)
 (map! :leader "SPC" (lambda () (interactive)
                       (if (equal (projectile-project-p) (concat (substitute-env-vars "$HOME") "/"))
                           (princ "Root is $HOME, ignore")
@@ -101,12 +100,19 @@
 (global-undo-tree-mode)
 (undo-tree-mode t)
 
+;; EDTS
+
 (after! erlang
-  (require 'edts-start))
+  (require 'edts-start)
+  (auto-complete-mode))
 
 ;; Spray mode
-
 (setq spray-height 250)
+(setq spray-wpm 200)
+(add-hook 'spray-mode-hook 'evil-emacs-state)
+
+;; Nov.el
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 
 ;; Harpoon
 (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
@@ -255,9 +261,13 @@
     )
   )
 
-(defun org-scratch ()
-  "Creates or switches to *org-scratch* buffer"
+(defun flexible-scratch (&optional mode)
+  "Creates or switches to *scratch* buffer with specified mode.
+   Org mode is the default."
   (interactive)
-  (let ((buffer (get-buffer-create "*org-scratch*")))
-    (with-current-buffer buffer (org-mode))
+  (let* ((mode (or mode "org"))
+         (name (concat "*" mode "-scratch*"))
+         (mode (symbol-function (intern-soft (concat mode "-mode"))))
+         (buffer (get-buffer-create name)))
+    (with-current-buffer buffer (funcall mode))
     (set-window-buffer nil buffer)))
