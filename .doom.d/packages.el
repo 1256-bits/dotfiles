@@ -57,7 +57,7 @@
 (package! zoxide)
 (package! undo-tree)
 (package! xah-fly-keys)
-(package! edts :recipe (cdr (append (straight-recipes-retrieve 'edts) '(:pre-build ("make" "all"))))) ; Needs manual build!
+(package! edts :recipe (cdr (append (straight-recipes-retrieve 'edts) '(:pre-build ("make" "all")))))
 ;; Don't attempt to install distel ever again. It is broken beyond any use.
 (package! spray)
 (package! nov)
