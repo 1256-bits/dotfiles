@@ -48,7 +48,7 @@
                                         ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
                                         ;(unpin! t)
-(package! harpoon)
+;;(package! harpoon) never used it
 (package! org-roam)
 (package! reverse-im)
 (unpin! org-roam)

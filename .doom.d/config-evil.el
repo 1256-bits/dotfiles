@@ -109,21 +109,11 @@
 ;; Spray mode
 (setq spray-height 250)
 (setq spray-wpm 200)
+(add-hook 'spray-mode-hook (lambda () (if (fboundp 'evil-emacs-state)
+                                          (evil-emacs-state))))
 
 ;; Nov.el
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-
-(map! :g (kbd "<escape>") #'god-local-mode)
-(require 'god-mode-isearch)
-(map! :map isearch-mode-map :g (kbd "<escape>") #'god-mode-isearch-activate)
-(map! :map god-mode-isearch-map :g (kbd "<escape>") #'god-mode-isearch-disable)
-(map! :map god-local-mode-map :g (kbd ".") #'repeat)
-(map! :g "C-x C-1" #'delete-other-windows)
-(map! :g "C-x C-2" #'split-window-below)
-(map! :g "C-x C-3" #'split-window-right)
-(map! :g "C-x C-0" #'delete-window)
-(map! :map god-local-mode-map :g  "[" #'backward-paragraph)
-(map! :map god-local-mode-map :g "]" #'forward-paragraph)
 
 ;; Harpoon
 ;; (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
@@ -150,15 +140,24 @@
 (map! :leader "r f" #'org-roam-node-find)
 
 ;; Roam-specific bind
-(map! :leader "r i i" #'org-roam-node-inser)
-(map! :leader "r i d" #'org-roam-node-insert-with-des)
-(map! :leader "r b" #'org-roam-buffer-toggle)
-(map! :leader "r e" #'org-roam-extract-subtree)
-(map! :leader "r t a" #'org-roam-tag-add)
-(map! :leader "r t r" #'org-roam-tag-remove)
-(map! :leader "r a a" #'org-roam-alias-add)
-(map! :leader "r a r" #'org-roam-alias-remove)
-
+(map!
+ :leader "r i i"
+ (lambda () (interactive)(evil-append 1)(org-roam-node-insert)(evil-normal-state)))
+(map!
+ :leader "r i d"
+ (lambda () (interactive)(evil-append 1)(org-roam-node-insert-with-desc)(evil-normal-state)))
+(map!
+ :leader "r b" #'org-roam-buffer-toggle)
+(map!
+ :leader "r e" #'org-roam-extract-subtree)
+(map!
+ :leader "r t a" #'org-roam-tag-add)
+(map!
+ :leader "r t r" #'org-roam-tag-remove)
+(map!
+ :leader "r a a" #'org-roam-alias-add)
+(map!
+ :leader "r a r" #'org-roam-alias-remove)
 
 
 ;; Org roam ui
@@ -273,3 +272,5 @@
          (buffer (get-buffer-create name)))
     (with-current-buffer buffer (funcall mode))
     (set-window-buffer nil buffer)))
+
+(defun evil-insert-wrapper ())
