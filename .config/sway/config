@@ -65,7 +65,7 @@ input "type:touchpad" {
 
 input "type:keyboard" {
     xkb_layout us,ru 
-    xkb_options grp:alts_toggle,caps:ctrl_modifier
+    xkb_options grp:alts_toggle,caps:escape
     xkb_variant altgr-intl
 }
 
@@ -276,7 +276,7 @@ default_border pixel
 smart_gaps on
 gaps outer 0
 exec --no-startup-id syncthing --no-browser
-exec --no-startup-id /usr/lib/kdeconnectd
+exec --no-startup-id kdeconnectd
 exec --no-startup-id $browser
 exec --no-startup-id $HOME/.config/sway/tor.sh
 exec --no-startup-id keepassxc
@@ -286,3 +286,4 @@ exec --no-startup-id exec ./emac.sh
 exec --no-startup-id udiskie
 exec --no-startup-id $HOME/.config/sway/swhkd.sh 
 exec --no-startup-id dunst
+exec --no-startup-id nm-applet
