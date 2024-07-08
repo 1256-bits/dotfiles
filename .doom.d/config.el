@@ -107,8 +107,11 @@
   (auto-complete-mode))
 
 ;; Spray mode
+(map! :g "<f6>" #'spray-mode)
 (setq spray-height 250)
 (setq spray-wpm 200)
+(setq spray-margin-top 8)
+(setq spray-margin-left 100)
 
 ;; Nov.el
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
