@@ -7,7 +7,7 @@ i3status | while :; do
 	else
 		pomodoro=""
 	fi
-  layout="$(swaymsg -t get_inputs -r | jq '[.[] | select(.xkb_active_layout_name != null) | .xkb_active_layout_name ] | .[1] | .[0:2] | ascii_upcase')"
+  layout="$(swaymsg -t get_inputs -r | jq '[.[] | select(.xkb_active_layout_name != null) | .xkb_active_layout_name ] | .[1] | .[0:2] | ascii_upcase' | tr -d "\"")"
 	sensors=$(sensors | grep temp1 | head -1 | awk '{print $2}')
 	echo "$pomodoro $line | $layout | $sensors" || exit 1
 done
