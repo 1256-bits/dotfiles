@@ -100,6 +100,16 @@
 (global-undo-tree-mode)
 (undo-tree-mode t)
 
+;; Tab bar mode
+(setq tab-bar-show nil)
+(tab-bar-mode t)
+(defun tab-bar-toggle-visibility ()
+  (interactive)
+  (setq tab-bar-show (not tab-bar-show))
+  (tab-bar-mode nil)
+  (tab-bar-mode t))
+
+
 ;; EDTS
 
 (after! erlang
@@ -108,14 +118,20 @@
 
 ;; Spray mode
 (map! :g "<f6>" #'spray-mode)
+(add-hook! 'spray-mode-hook
+  (lambda () (setq spray-margin-top (round (* (window-body-height) 0.25)))
+    (setq spray-margin-left (round (* (window-body-width) 0.2))))
+  (if spray-mode (god-local-mode-pause)
+    (god-local-mode-resume)))
 (setq spray-height 250)
 (setq spray-wpm 200)
-(setq spray-margin-top 8)
-(setq spray-margin-left 100)
 
 ;; Nov.el
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+(add-hook 'nov-mode-hook #'visual-line-mode)
 
+;; God mode
+(setq god-mode-enable-function-key-translation nil)
 (map! :g (kbd "<escape>") #'god-local-mode)
 (require 'god-mode-isearch)
 (map! :map isearch-mode-map :g (kbd "<escape>") #'god-mode-isearch-activate)
