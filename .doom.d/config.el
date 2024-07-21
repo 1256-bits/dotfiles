@@ -91,14 +91,11 @@
 ;; Insert " " because of evil mode
 (map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
 (map! :n "g z" #'zoxide-find-file)
-(map! :leader "o x" #'flexible-scratch)
+(map! :leader "o x" #'flexible-scratch-choise)
 (map! :leader "SPC" (lambda () (interactive)
                       (if (equal (projectile-project-p) (concat (substitute-env-vars "$HOME") "/"))
                           (princ "Root is $HOME, ignore")
                         (projectile-find-file))))
-
-(global-undo-tree-mode)
-(undo-tree-mode t)
 
 ;; Tab bar mode
 (setq tab-bar-show nil)
@@ -169,8 +166,8 @@
 (map! :leader "r f" #'org-roam-node-find)
 
 ;; Roam-specific bind
-(map! :leader "r i i" #'org-roam-node-inser)
-(map! :leader "r i d" #'org-roam-node-insert-with-des)
+(map! :leader "r i i" #'org-roam-node-insert)
+(map! :leader "r i d" #'org-roam-node-insert-with-dest)
 (map! :leader "r b" #'org-roam-buffer-toggle)
 (map! :leader "r e" #'org-roam-extract-subtree)
 (map! :leader "r t a" #'org-roam-tag-add)
@@ -206,25 +203,6 @@
   (setq org-roam-db-extra-links-exclude-keys
         '((node-property "ROAM_REFS")))
   (setq org-roam-db-extra-links-elements '(keyword "transclude")))
-
-
-;; Reverse-im
-(use-package! char-fold
-  :custom
-  (char-fold-symmetric t)
-  (search-default-mode #'char-fold-to-regexp))
-(use-package! reverse-im
-  :demand t ; always load it
-  :after char-fold ; but only after `char-fold' is loaded
-  :init
-  (map! :leader "f w" #'reverse-im-translate-word) ; fix a word in wrong layout
-  :custom
-  (reverse-im-char-fold t) ; use lax matching
-  (reverse-im-read-char-advice-function #'reverse-im-read-char-include)
-  (reverse-im-input-methods '("russian-computer")) ; translate these methods
-  :config
-  (reverse-im-mode t)) ; turn the mode on
-
 
 ;; Custom elisp functions
 (defun org-insert-code-block ()
@@ -292,3 +270,10 @@
          (buffer (get-buffer-create name)))
     (with-current-buffer buffer (funcall mode))
     (set-window-buffer nil buffer)))
+
+(defun flexible-scratch-choise ()
+  (interactive)
+  (flexible-scratch (cadr (read-multiple-choice "Which mode?"
+                                                '((?1 "org")
+                                                  (?2 "text")
+                                                  (?3 "common-lisp"))))))
