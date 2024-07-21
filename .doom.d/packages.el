@@ -50,12 +50,12 @@
                                         ;(unpin! t)
 ;;(package! harpoon) never used it
 (package! org-roam)
-(package! reverse-im)
+;;(package! reverse-im)
 (unpin! org-roam)
 (package! org-roam-ui)
 (package! org-transclusion)
 (package! zoxide)
-(package! undo-tree)
+;;(package! undo-tree)
 ;;(package! xah-fly-keys)
 (package! edts :recipe (cdr (append (straight-recipes-retrieve 'edts) '(:pre-build ("make" "all")))))
 ;; Don't attempt to install distel ever again. It is broken beyond any use.
