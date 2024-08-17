@@ -63,3 +63,7 @@
 (package! nov)
 (package! fb2-reader)
 (package! tesseract :recipe '(:type git :repo "https://github.com/SebastianMeisel/tesseract.el"))
+;;(package! auto-capitalize :recipe '(:type git :repo "https://github.com/yuutayamada/auto-capitalize-el"))
+(package! auto-capitalize :recipe '(:type git :host github :repo "yuutayamada/auto-capitalize-el"))
+(package! boon :disable t)
+(package! meow)
