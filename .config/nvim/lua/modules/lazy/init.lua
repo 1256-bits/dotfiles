@@ -17,7 +17,6 @@ local plugins = {
   "saadparwaiz1/cmp_luasnip",
   "hrsh7th/cmp-buffer",
   "EdenEast/nightfox.nvim",
-  "mfussenegger/nvim-dap",
   "dstein64/vim-startuptime",
   "mattn/efm-langserver",
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
@@ -29,6 +28,10 @@ local plugins = {
   {
     "tpope/vim-fugitive",
     lazy = false,
+  },
+  {
+    "mfussenegger/nvim-dap",
+    lazy = true,
   },
   {
     "ThePrimeagen/harpoon",
@@ -63,6 +66,7 @@ local plugins = {
   {
     "mxsdev/nvim-dap-vscode-js",
     dependencies = { "mfussenegger/nvim-dap" },
+    lazy = true,
   },
   --[[{
     "microsoft/vscode-js-debug",
