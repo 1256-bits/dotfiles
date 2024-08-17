@@ -3,8 +3,8 @@
 alias spS = sudo pacman -S
 alias spR = sudo pacman -Rns
 alias yay = yay --sudoloop
-alias get-dirs = where type == "dir" or type == "symlink"
-alias get-files = where type == "file"
+#alias get-dirs = where type == "dir" or type == "symlink"
+#alias get-files = where type == "file"
 alias eza = eza --group-directories-first --icons
 alias e = eza --group-directories-first --icons
 alias oldpwd = cd $env.OLDPWD
