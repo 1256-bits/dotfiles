@@ -12,38 +12,67 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  "kovetskiy/sxhkd-vim",
-  "VonHeikemen/lsp-zero.nvim",
-  "ThePrimeagen/harpoon",
   "mbbill/undotree",
   "hrsh7th/cmp-path",
   "saadparwaiz1/cmp_luasnip",
   "hrsh7th/cmp-buffer",
-  "tpope/vim-fugitive",
+  "EdenEast/nightfox.nvim",
+  "mfussenegger/nvim-dap",
+  "dstein64/vim-startuptime",
+  "mattn/efm-langserver",
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  "nvim-treesitter/nvim-treesitter-textobjects",
+  {
+    "kovetskiy/sxhkd-vim",
+    cond = vim.fs.basename(vim.api.nvim_buf_get_name(0)),
+  },
+  {
+    "tpope/vim-fugitive",
+    lazy = false,
+  },
+  {
+    "ThePrimeagen/harpoon",
+    lazy = true,
+  },
   {
     "shaunsingh/nord.nvim",
     lazy = true,
   },
-  "EdenEast/nightfox.nvim",
-  "mfussenegger/nvim-dap",
-  "LhKipp/nvim-nu",
-  "dstein64/vim-startuptime",
-  "mattn/efm-langserver",
-  "nvim-neotest/nvim-nio",
-  "ishan9299/modus-theme-vim",
   {
-    "creativenull/efmls-configs-nvim",
-    version = "v1.x.x", -- version is optional, but recommended
-    dependencies = { "neovim/nvim-lspconfig" },
+    "LhKipp/nvim-nu",
+    lazy = true,
+  },
+  {
+    "nvim-neotest/nvim-nio",
+    lazy = true,
+  },
+  {
+    "ishan9299/modus-theme-vim",
+    lazy = true,
   },
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { "mfussenegger/nvim-dap" },
+    lazy = true,
   },
   {
     "mcchrish/zenbones.nvim",
     lazy = true,
     dependencies = { "rktjmp/lush.nvim" },
+  },
+  {
+    "mxsdev/nvim-dap-vscode-js",
+    dependencies = { "mfussenegger/nvim-dap" },
+  },
+  --[[{
+    "microsoft/vscode-js-debug",
+    build = "sh -c 'npm install && npx gulp vsDebugServerBundle && mv dist out'",
+    lazy = true,
+  },]]
+  {
+    "creativenull/efmls-configs-nvim",
+    version = "v1.x.x", -- version is optional, but recommended
+    dependencies = { "neovim/nvim-lspconfig" },
   },
   {
     "kylechui/nvim-surround",
@@ -59,8 +88,8 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.4",
     dependencies = { "nvim-lua/plenary.nvim" },
+    lazy = true,
   },
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   {
     "VonHeikemen/lsp-zero.nvim",
     branch = "v2.x",
