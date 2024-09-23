@@ -62,6 +62,16 @@ require("dap-vscode-js").setup({
 })
 
 for _, language in ipairs({ "typescript", "javascript" }) do
+  local is_yarn = vim.fn.glob(".yarn") ~= ""
+  local executable = is_yarn and "yarn" or "node"
+  local runtimeArgs
+  if language == "typescript" then
+    if is_yarn then
+      runtimeArgs = { "node", "-r", "ts-node/register" }
+    else
+      runtimeArgs = { "-r", "ts-node/register" }
+    end
+  end
   require("dap").configurations[language] = {
     {
       type = "pwa-node",
@@ -69,6 +79,14 @@ for _, language in ipairs({ "typescript", "javascript" }) do
       name = "Launch file",
       program = "${file}",
       cwd = "${workspaceFolder}",
+      runtimeExecutable = executable,
+      sourceMaps = true,
+      skipFiles = { "<node_internals>/**" },
+      resolveSourceMapLocations = {
+        "${workspaceFolder}/**",
+        "!**/node_modules/**",
+      },
+      runtimeArgs = runtimeArgs,
     },
     {
       type = "pwa-node",
@@ -76,6 +94,14 @@ for _, language in ipairs({ "typescript", "javascript" }) do
       name = "Attach",
       processId = require("dap.utils").pick_process,
       cwd = "${workspaceFolder}",
+      runtimeExecutable = executable,
+      sourceMaps = true,
+      skipFiles = { "<node_internals>/**" },
+      resolveSourceMapLocations = {
+        "${workspaceFolder}/**",
+        "!**/node_modules/**",
+      },
+      runtimeArgs = runtimeArgs,
     },
     {
       type = "pwa-node",
