@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+  "lbrayner/vim-rzip",
   "mbbill/undotree",
   "hrsh7th/cmp-path",
   "saadparwaiz1/cmp_luasnip",
@@ -23,7 +24,7 @@ local plugins = {
   "nvim-treesitter/nvim-treesitter-textobjects",
   {
     "kovetskiy/sxhkd-vim",
-    cond = vim.fs.basename(vim.api.nvim_buf_get_name(0)),
+    cond = vim.o.filetype == "sxhkd",
   },
   {
     "tpope/vim-fugitive",
@@ -43,7 +44,7 @@ local plugins = {
   },
   {
     "LhKipp/nvim-nu",
-    lazy = true,
+    lazy = vim.o.filetype == "nu",
   },
   {
     "nvim-neotest/nvim-nio",
