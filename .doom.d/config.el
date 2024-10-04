@@ -90,12 +90,23 @@
 ;; Keybinds
 ;; Insert " " because of evil mode
 (map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
-(map! :n "g z" #'zoxide-find-file)
 (map! :leader "o x" #'flexible-scratch-choise)
 (map! :leader "SPC" (lambda () (interactive)
                       (if (equal (projectile-project-p) (concat (substitute-env-vars "$HOME") "/"))
                           (princ "Root is $HOME, ignore")
                         (projectile-find-file))))
+
+(map! :leader
+      :prefix ("C-v" . "vimish fold")
+      :desc "Fold region"          "C-f" #'hs-hide-block
+      :desc "Unfold region"        "C-u" #'hs-show-block
+      :desc "Delete folded region" "C-d" #'hs-kill-block
+      (:prefix ("C-a" . "fold all")
+       :desc "Fold all regions"     "C-f" #'hs-hide-all
+       :desc "Unfold all regions"   "C-u" #'hs-show-all
+       :desc "Delete all folded regions" "C-d" #'hs-kill-all))
+
+(map! :leader "C-f" nil)
 
 ;; Tab bar mode
 (setq tab-bar-show nil)
@@ -106,6 +117,8 @@
   (tab-bar-mode nil)
   (tab-bar-mode t))
 
+(use-package! zoxide
+  (map! :n "g z" #'zoxide-find-file))
 
 ;; EDTS
 
@@ -122,8 +135,12 @@
 (setq spray-wpm 200)
 
 ;; Nov.el
-(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-(add-hook 'nov-mode-hook #'visual-line-mode)
+(use-package! nov
+  :config
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+  (add-hook 'nov-mode-hook #'visual-line-mode)
+  (setq dictionary-default-dictionary "wn")
+  (map! :map 'nov-mode-map :g "C-c C-d" (lambda () (interactive)(dictionary-search (word-at-point)))))
 
 ;; God mode
 (use-package! god-mode
@@ -164,116 +181,126 @@
 (use-package! boon
   :if (require 'boon-qwerty nil 'noerror)
   :config
-  (turn-on-boon-mode)
-  (map! :map boon-x-map :g "x l"))
+  (boon-mode)
+  (map! :map boon-x-map :g "u" 'undo-tree-undo)
+  (map! :map boon-x-map :g "U" 'undo-tree-redo)
+  (map! :map boon-x-map :g "u v" 'undo-tree-redo)
+  (map! :map boon-command-map :g "M-V" 'scroll-up-command)
+  (map! :map boon-command-map :g "r" #'consult-line)
+  (map! :map boon-select-map :g "S" #'boon-select-sentence)
+  (map! :map boon-select-map :g "t" #'boon-select-org-tree))
 
 ;; Meow
-(defun meow-setup ()
-  (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
-  (meow-motion-overwrite-define-key
-   '("j" . meow-next)
-   '("k" . meow-prev)
-   '("<escape>" . ignore))
-  (meow-leader-define-key
-   ;; SPC j/k will run the original command in MOTION state.
-   '("j" . "H-j")
-   '("k" . "H-k")
-   ;; Use SPC (0-9) for digit arguments.
-   '("1" . meow-digit-argument)
-   '("2" . meow-digit-argument)
-   '("3" . meow-digit-argument)
-   '("4" . meow-digit-argument)
-   '("5" . meow-digit-argument)
-   '("6" . meow-digit-argument)
-   '("7" . meow-digit-argument)
-   '("8" . meow-digit-argument)
-   '("9" . meow-digit-argument)
-   '("0" . meow-digit-argument)
-   '("/" . meow-keypad-describe-key)
-   '("?" . meow-cheatsheet))
-  (meow-normal-define-key
-   '("0" . meow-expand-0)
-   '("9" . meow-expand-9)
-   '("8" . meow-expand-8)
-   '("7" . meow-expand-7)
-   '("6" . meow-expand-6)
-   '("5" . meow-expand-5)
-   '("4" . meow-expand-4)
-   '("3" . meow-expand-3)
-   '("2" . meow-expand-2)
-   '("1" . meow-expand-1)
-   '("-" . negative-argument)
-   '(";" . meow-reverse)
-   '("," . meow-inner-of-thing)
-   '("." . meow-bounds-of-thing)
-   '("[" . meow-beginning-of-thing)
-   '("]" . meow-end-of-thing)
-   '("a" . meow-append)
-   '("A" . meow-open-below)
-   '("b" . meow-back-word)
-   '("B" . meow-back-symbol)
-   '("c" . meow-change)
-   '("d" . meow-delete)
-   '("D" . meow-backward-delete)
-   '("e" . meow-next-word)
-   '("E" . meow-next-symbol)
-   '("f" . meow-find)
-   '("g" . meow-cancel-selection)
-   '("G" . meow-grab)
-   '("h" . meow-left)
-   '("H" . meow-left-expand)
-   '("i" . meow-insert)
-   '("I" . meow-open-above)
-   '("j" . meow-next)
-   '("J" . meow-next-expand)
-   '("k" . meow-prev)
-   '("K" . meow-prev-expand)
-   '("l" . meow-right)
-   '("L" . meow-right-expand)
-   '("m" . meow-join)
-   '("n" . meow-search)
-   '("o" . meow-block)
-   '("O" . meow-to-block)
-   '("p" . meow-yank)
-   '("q" . meow-quit)
-   '("Q" . meow-goto-line)
-   '("r" . meow-replace)
-   '("R" . meow-swap-grab)
-   '("s" . meow-kill)
-   '("t" . meow-till)
-   '("u" . meow-undo)
-   '("U" . meow-undo-in-selection)
-   '("v" . meow-visit)
-   '("w" . meow-mark-word)
-   '("W" . meow-mark-symbol)
-   '("x" . meow-line)
-   '("X" . meow-goto-line)
-   '("y" . meow-save)
-   '("Y" . meow-sync-grab)
-   '("z" . meow-pop-selection)
-   '("'" . repeat)
-   '("<escape>" . ignore)))
-;; (require 'meow)
-;; (meow-setup)
-;; (meow-global-mode 1)
+(use-package! meow
+  :if (require 'meow nil 'noerror)
+  :config
+  (flet ((meow-setup ()
+                     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+                     (meow-motion-overwrite-define-key
+                      '("j" . meow-next)
+                      '("k" . meow-prev)
+                      '("<escape>" . ignore))
+                     (meow-leader-define-key
+                      ;; SPC j/k will run the original command in MOTION state.
+                      '("j" . "H-j")
+                      '("k" . "H-k")
+                      ;; Use SPC (0-9) for digit arguments.
+                      '("1" . meow-digit-argument)
+                      '("2" . meow-digit-argument)
+                      '("3" . meow-digit-argument)
+                      '("4" . meow-digit-argument)
+                      '("5" . meow-digit-argument)
+                      '("6" . meow-digit-argument)
+                      '("7" . meow-digit-argument)
+                      '("8" . meow-digit-argument)
+                      '("9" . meow-digit-argument)
+                      '("0" . meow-digit-argument)
+                      '("/" . meow-keypad-describe-key)
+                      '("?" . meow-cheatsheet))
+                     (meow-normal-define-key
+                      '("0" . meow-expand-0)
+                      '("9" . meow-expand-9)
+                      '("8" . meow-expand-8)
+                      '("7" . meow-expand-7)
+                      '("6" . meow-expand-6)
+                      '("5" . meow-expand-5)
+                      '("4" . meow-expand-4)
+                      '("3" . meow-expand-3)
+                      '("2" . meow-expand-2)
+                      '("1" . meow-expand-1)
+                      '("-" . negative-argument)
+                      '(";" . meow-reverse)
+                      '("," . meow-inner-of-thing)
+                      '("." . meow-bounds-of-thing)
+                      '("[" . meow-beginning-of-thing)
+                      '("]" . meow-end-of-thing)
+                      '("a" . meow-append)
+                      '("A" . meow-open-below)
+                      '("b" . meow-back-word)
+                      '("B" . meow-back-symbol)
+                      '("c" . meow-change)
+                      '("d" . meow-delete)
+                      '("D" . meow-backward-delete)
+                      '("e" . meow-next-word)
+                      '("E" . meow-next-symbol)
+                      '("f" . meow-find)
+                      '("g" . meow-cancel-selection)
+                      '("G" . meow-grab)
+                      '("h" . meow-left)
+                      '("H" . meow-left-expand)
+                      '("i" . meow-insert)
+                      '("I" . meow-open-above)
+                      '("j" . meow-next)
+                      '("J" . meow-next-expand)
+                      '("k" . meow-prev)
+                      '("K" . meow-prev-expand)
+                      '("l" . meow-right)
+                      '("L" . meow-right-expand)
+                      '("m" . meow-join)
+                      '("n" . meow-search)
+                      '("o" . meow-block)
+                      '("O" . meow-to-block)
+                      '("p" . meow-yank)
+                      '("q" . meow-quit)
+                      '("Q" . meow-goto-line)
+                      '("r" . meow-replace)
+                      '("R" . meow-swap-grab)
+                      '("s" . meow-kill)
+                      '("t" . meow-till)
+                      '("u" . meow-undo)
+                      '("U" . meow-undo-in-selection)
+                      '("v" . meow-visit)
+                      '("w" . meow-mark-word)
+                      '("W" . meow-mark-symbol)
+                      '("x" . meow-line)
+                      '("X" . meow-goto-line)
+                      '("y" . meow-save)
+                      '("Y" . meow-sync-grab)
+                      '("z" . meow-pop-selection)
+                      '("'" . repeat)
+                      '("<escape>" . ignore))))
+        (meow-setup)
+        (meow-global-mode 1)
+        ))
 
 ;; org roam
 (setq org-roam-directory (file-truename "~/Documents/roam"))
 (org-roam-db-autosync-mode)
 (add-hook! org-roam-mode (visual-line-mode))
 
-;; Universal lookup bind
-(map! :leader "r f" #'org-roam-node-find)
-
-;; Roam-specific bind
-(map! :leader "r i i" #'org-roam-node-insert)
-(map! :leader "r i d" #'org-roam-node-insert-with-dest)
-(map! :leader "r b" #'org-roam-buffer-toggle)
-(map! :leader "r e" #'org-roam-extract-subtree)
-(map! :leader "r t a" #'org-roam-tag-add)
-(map! :leader "r t r" #'org-roam-tag-remove)
-(map! :leader "r a a" #'org-roam-alias-add)
-(map! :leader "r a r" #'org-roam-alias-remove)
+(map! :leader :prefix ("r" . "roam")
+      "f" #'org-roam-node-find
+      "b" #'org-roam-buffer-toggle
+      "e" #'org-roam-extract-subtree
+      (:prefix ("i" . "insert")
+               "i" #'org-roam-node-insert
+               "d" #'org-roam-node-insert-with-desc)
+      (:prefix ("t" . "tag")
+               "a" #'org-roam-tag-add
+               "r" #'org-roam-tag-remove)
+      (:prefix ("a" . "alias")
+               "a" #'org-roam-alias-add
+               "r" #'org-roam-alias-remove))
 
 
 

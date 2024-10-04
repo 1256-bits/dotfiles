@@ -54,9 +54,7 @@
 (unpin! org-roam)
 (package! org-roam-ui)
 (package! org-transclusion)
-(package! zoxide)
-;;(package! undo-tree)
-;;(package! xah-fly-keys)
+(package! zoxide :disable t)
 (package! edts :recipe (cdr (append (straight-recipes-retrieve 'edts) '(:pre-build ("make" "all")))))
 ;; Don't attempt to install distel ever again. It is broken beyond any use.
 (package! spray)
@@ -65,5 +63,5 @@
 (package! tesseract :recipe '(:type git :repo "https://github.com/SebastianMeisel/tesseract.el"))
 ;;(package! auto-capitalize :recipe '(:type git :repo "https://github.com/yuutayamada/auto-capitalize-el"))
 (package! auto-capitalize :recipe '(:type git :host github :repo "yuutayamada/auto-capitalize-el"))
-(package! boon :disable t)
-(package! meow)
+(package! boon)
+(package! meow :disable t)
