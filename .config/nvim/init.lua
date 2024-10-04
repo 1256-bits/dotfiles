@@ -29,9 +29,9 @@ vim.cmd.colorscheme("nordfox")
 vim.cmd.highlight({ "signcolumn", "guibg=dimgray" })
 vim.opt.splitright = true
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufNew" }, {
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*.ejs" },
   callback = function ()
-      vim.opt.filetype = "html"
+      vim.cmd.setfiletype('html')
   end
 })
