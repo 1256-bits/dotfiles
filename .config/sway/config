@@ -65,8 +65,8 @@ input "type:touchpad" {
 
 input "type:keyboard" {
     xkb_layout us,ru 
-    #xkb_options grp:alts_toggle,caps:escape
-    xkb_options grp:alts_toggle,caps:ctrl_modifier
+    xkb_options grp:alts_toggle,caps:escape
+    #xkb_options grp:alts_toggle,caps:ctrl_modifier
     xkb_variant altgr-intl
 }
 
@@ -283,7 +283,6 @@ exec --no-startup-id $HOME/.config/sway/tor.sh
 exec --no-startup-id keepassxc
 exec --no-startup-id swaymsg 'workspace 9; layout tabbed; workspace 1'
 exec --no-startup-id i3-sensible-terminal
-exec --no-startup-id exec ./emac.sh
 exec --no-startup-id udiskie
 exec --no-startup-id $HOME/.config/sway/swhkd.sh 
 exec --no-startup-id dunst
