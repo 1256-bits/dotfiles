@@ -234,7 +234,17 @@ include /etc/sway/config.d/*
         #swaybar_command waybar
         }
 
+#Keybinds
 bindsym Print exec slurp | grim -g - - | wl-copy
+bindsym Ctrl+Alt+z exec $browser
+bindsym $mod+d exec discord
+bindsym $mod+Alt+End exec poweroff
+bindsym $mod+F6 exec amixer -D pulse set Master toggle
+bindsym $mod+F7 exec pamixer -d 5
+bindsym $mod+F8 exec pamixer -i 5
+bindsym $mod+Shift+F7 exec pamixer -d 1
+bindsym $mod+Shift+F8 exec pamixer -i 1
+bindsym $mod+o exec emacsclient -c
 
 #Start GNOME keyring
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
@@ -284,6 +294,5 @@ exec --no-startup-id keepassxc
 exec --no-startup-id swaymsg 'workspace 9; layout tabbed; workspace 1'
 exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id udiskie
-exec --no-startup-id $HOME/.config/sway/swhkd.sh 
 exec --no-startup-id dunst
 exec --no-startup-id nm-applet
