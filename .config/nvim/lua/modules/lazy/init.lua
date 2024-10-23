@@ -23,6 +23,10 @@ local plugins = {
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "nvim-treesitter/nvim-treesitter-textobjects",
   {
+    "David-Kunz/jester",
+    lazy = true,
+  },
+  {
     "kovetskiy/sxhkd-vim",
     cond = vim.o.filetype == "sxhkd",
   },
