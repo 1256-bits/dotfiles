@@ -54,7 +54,6 @@
 (unpin! org-roam)
 (package! org-roam-ui)
 (package! org-transclusion)
-(package! zoxide :disable t)
 (package! edts :recipe (cdr (append (straight-recipes-retrieve 'edts) '(:pre-build ("make" "all")))))
 ;; Don't attempt to install distel ever again. It is broken beyond any use.
 (package! spray)
