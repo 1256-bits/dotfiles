@@ -42,7 +42,12 @@
   (setq doom-themes-enable-bold t))
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
-  '(font-lock-keyword-face :slant italic))
+  '(font-lock-keyword-face :slant italic)
+  (let ((color (color-darken-name
+                (face-attribute 'default :background) 5)))
+    `(org-block :background ,color)
+    `(org-block-begin-line :background ,color :extend t)
+    `(org-block-end-line :background ,color :extend t)))
 (set-mouse-color "snow")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
@@ -107,6 +112,7 @@
        :desc "Delete all folded regions" "C-d" #'hs-kill-all))
 
 (map! :leader "C-f" nil)
+(map! :leader "C-z" #'dired-zoxide)
 
 ;; Tab bar mode
 (setq tab-bar-show nil)
@@ -120,6 +126,8 @@
 (use-package! zoxide
   (map! :n "g z" #'zoxide-find-file))
 
+;; (use-package! flycheck
+;;   (flycheck-disable-checker 'proselint))
 ;; EDTS
 
 (after! erlang
@@ -188,7 +196,11 @@
   (map! :map boon-command-map :g "M-V" 'scroll-up-command)
   (map! :map boon-command-map :g "r" #'consult-line)
   (map! :map boon-select-map :g "S" #'boon-select-sentence)
-  (map! :map boon-select-map :g "t" #'boon-select-org-tree))
+  (map! :map boon-select-map :g "t" #'boon-select-org-tree)
+  (add-to-list 'boon-special-mode-list 'sly-db))
+
+(after! sly
+  (setq sly-complete-symbol-function 'sly-flex-completions))
 
 ;; Meow
 (use-package! meow
@@ -292,6 +304,7 @@
       "f" #'org-roam-node-find
       "b" #'org-roam-buffer-toggle
       "e" #'org-roam-extract-subtree
+      "d" #'org-roam-dailies-capture-today
       (:prefix ("i" . "insert")
                "i" #'org-roam-node-insert
                "d" #'org-roam-node-insert-with-desc)
@@ -403,5 +416,20 @@
   (flexible-scratch (cadr (read-multiple-choice "Which mode?"
                                                 '((?1 "org")
                                                   (?2 "text")
+
+
+
+
+
+
+
                                                   (?3 "common-lisp")
                                                   (?4 "lisp-interaction"))))))
+
+(defun dired-zoxide ()
+  (interactive)
+  (let* ((query (read-string "z: "))
+         (result (car (condition-case nil
+                          (process-lines "zoxide" "query" query)
+                        (error "Directory \"%s\" not found" query)))))
+    (dired result)))
