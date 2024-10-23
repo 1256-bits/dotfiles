@@ -31,7 +31,7 @@ vim.opt.splitright = true
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*.ejs" },
-  callback = function ()
-      vim.cmd.setfiletype('html')
+  callback = function()
+    vim.cmd.setfiletype('html')
   end
 })
