@@ -407,7 +407,7 @@
         (id (org-roam-node-id (org-roam-node-read)))
         (description (read-string "Description:"))
         )
-    (insert (concat "[[id:" id "][" description "]]"))))
+    (insert (format "[[id:%s][%s]]" id description))))
 
 (defun flexible-scratch (&optional mode)
   "Creates or switches to *scratch* buffer with specified mode.
