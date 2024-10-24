@@ -3,7 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "John Doe"
@@ -97,22 +96,25 @@
 (map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
 (map! :leader "o x" #'flexible-scratch-choise)
 (map! :leader "SPC" (lambda () (interactive)
-                      (if (equal (projectile-project-p) (concat (substitute-env-vars "$HOME") "/"))
+                      (if (equal (projectile-project-p) (f-expand "~/"))
                           (princ "Root is $HOME, ignore")
                         (projectile-find-file))))
 
-(map! :leader
-      :prefix ("C-v" . "vimish fold")
-      :desc "Fold region"          "C-f" #'hs-hide-block
-      :desc "Unfold region"        "C-u" #'hs-show-block
-      :desc "Delete folded region" "C-d" #'hs-kill-block
-      (:prefix ("C-a" . "fold all")
-       :desc "Fold all regions"     "C-f" #'hs-hide-all
-       :desc "Unfold all regions"   "C-u" #'hs-show-all
-       :desc "Delete all folded regions" "C-d" #'hs-kill-all))
+;; (map! :leader
+;;       :prefix ("C-v" . "vimish fold")
+;;       :desc "Fold region"          "C-f" #'hs-hide-block
+;;       :desc "Unfold region"        "C-u" #'hs-show-block
+;;       :desc "Delete folded region" "C-d" #'hs-kill-block
+;;       (:prefix ("C-a" . "fold all")
+;;        :desc "Fold all regions"     "C-f" #'hs-hide-all
+;;        :desc "Unfold all regions"   "C-u" #'hs-show-all
+;;        :desc "Delete all folded regions" "C-d" #'hs-kill-all))
 
 (map! :leader "C-f" nil)
 (map! :leader "C-z" #'dired-zoxide)
+
+(map! :m 'minibuffer-mode-map :g "M-i" #'previous-line)
+(map! :m 'minibuffer-mode-map :g "M-o" #'next-line)
 
 ;; Tab bar mode
 (setq tab-bar-show nil)
@@ -122,9 +124,6 @@
   (setq tab-bar-show (not tab-bar-show))
   (tab-bar-mode nil)
   (tab-bar-mode t))
-
-(use-package! zoxide
-  (map! :n "g z" #'zoxide-find-file))
 
 ;; (use-package! flycheck
 ;;   (flycheck-disable-checker 'proselint))
@@ -197,7 +196,22 @@
   (map! :map boon-command-map :g "r" #'consult-line)
   (map! :map boon-select-map :g "S" #'boon-select-sentence)
   (map! :map boon-select-map :g "t" #'boon-select-org-tree)
-  (add-to-list 'boon-special-mode-list 'sly-db))
+  (map! :map boon-command-map :g "m" #'zz-half-scroll-forward-with-view)
+  (map! :map boon-command-map :g "M" #'zz-half-scroll-backwards-with-view)
+  (map! :map boon-x-map :g "s" #'save-buffer)
+  (map! :map boon-x-map :g "S" #'save-some-buffers)
+  (add-to-list 'boon-special-mode-list 'sly-db-mode))
+
+(require 'view)
+(defun zz-half-scroll-forward-with-view ()
+  (interactive)
+  (View-scroll-half-page-forward)
+  (move-to-window-line (/ (window-body-height) 2)))
+
+(defun zz-half-scroll-backwards-with-view ()
+  (interactive)
+  (View-scroll-half-page-backward)
+  (move-to-window-line (/ (window-body-height) 2)))
 
 (after! sly
   (setq sly-complete-symbol-function 'sly-flex-completions))
@@ -292,8 +306,7 @@
                       '("'" . repeat)
                       '("<escape>" . ignore))))
         (meow-setup)
-        (meow-global-mode 1)
-        ))
+        (meow-global-mode 1)))
 
 ;; org roam
 (setq org-roam-directory (file-truename "~/Documents/roam"))
@@ -371,8 +384,7 @@
 (defun time-to-fixed-xx (time)
   "Converts number to a string and formats it to XX format"
   (if (>= time 10) (prin1-to-string time)
-    (concat "0" (prin1-to-string time)))
-  )
+    (concat "0" (prin1-to-string time))))
 
 
 (defun org-timestamp-nd-formatted (&optional no-brackets style)
@@ -385,8 +397,7 @@
                         ((equal style "verbatium") "=")
                         (t ""))))
     (insert (if no-brackets (format "%s%s%s" surround timestamp surround)
-              (format "%s[%s]%s" surround timestamp surround))))
-  )
+              (format "%s[%s]%s" surround timestamp surround)))))
 
 (defun org-roam-node-insert-with-desc ()
   "Looks up a roam node and inserts the link with specified description.
@@ -396,9 +407,7 @@
         (id (org-roam-node-id (org-roam-node-read)))
         (description (read-string "Description:"))
         )
-    (insert (concat "[[id:" id "][" description "]]"))
-    )
-  )
+    (insert (concat "[[id:" id "][" description "]]"))))
 
 (defun flexible-scratch (&optional mode)
   "Creates or switches to *scratch* buffer with specified mode.
@@ -416,13 +425,6 @@
   (flexible-scratch (cadr (read-multiple-choice "Which mode?"
                                                 '((?1 "org")
                                                   (?2 "text")
-
-
-
-
-
-
-
                                                   (?3 "common-lisp")
                                                   (?4 "lisp-interaction"))))))
 
