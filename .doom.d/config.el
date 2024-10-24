@@ -403,10 +403,8 @@
   "Looks up a roam node and inserts the link with specified description.
    The description is specified via prompt."
   (interactive)
-  (let (
-        (id (org-roam-node-id (org-roam-node-read)))
-        (description (read-string "Description:"))
-        )
+  (let ((id (org-roam-node-id (org-roam-node-read)))
+        (description (read-string "Description:")))
     (insert (format "[[id:%s][%s]]" id description))))
 
 (defun flexible-scratch (&optional mode)
