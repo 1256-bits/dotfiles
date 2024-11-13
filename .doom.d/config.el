@@ -100,6 +100,7 @@
                       (if (equal (projectile-project-p) (f-expand "~/"))
                           (princ "Root is $HOME, ignore")
                         (projectile-find-file))))
+(add-hook 'dired-after-readin-hook #'zoxide-add-default-dir)
 
 ;; (map! :leader
 ;;       :prefix ("C-v" . "vimish fold")
@@ -429,11 +430,25 @@
                                                   (?2 "text")
                                                   (?3 "common-lisp")
                                                   (?4 "lisp-interaction"))))))
+(defun zoxide--get-dir-list (query)
+  (let* ((query-list (s-split-words query))
+         (dir-list (apply #'process-lines "zoxide" "query" "-l" query-list)))
+    (list (nth 0 dir-list) (nth 1 dir-list))))
 
 (defun dired-zoxide ()
   (interactive)
   (let* ((query (read-string "z: "))
-         (result (car (condition-case nil
-                          (process-lines "zoxide" "query" query)
-                        (error "Directory \"%s\" not found" query)))))
-    (dired result)))
+         (dir-list (zoxide--get-dir-list query)))
+    (when (equal nil (car dir-list))
+      (message "Directory \"%s\" not found" query))
+    (dired-zoxide-cd dir-list)))
+
+(defun dired-zoxide-cd (dir-list)
+  (when (equal 1 (length dir-list)) (dired (car dir-list)))
+  (if (equal default-directory (concat (car dir-list) (f-path-separator)))
+      (dired (cdr dir-list))
+    (dired (car dir-list))))
+
+(defun zoxide-add-default-dir ()
+  (process-lines "zoxide" "add" default-directory)
+  (message "added %s" default-directory))
