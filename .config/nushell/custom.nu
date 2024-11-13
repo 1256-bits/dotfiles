@@ -19,6 +19,10 @@ alias D = DRI_PRIME=1
 alias mv = mv -iv
 alias cp = cp -iv
 
+alias dfd = dfs diff
+alias dfc = dfs com
+alias dfa = dfs add
+
 #let fish_completer = {|spans|
 #    let is_record = $spans | describe | $in =~ list
 #    if ($is_record) {
