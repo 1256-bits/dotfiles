@@ -195,7 +195,6 @@
   (boon-mode)
   (map! :map boon-x-map :g "u" 'undo-tree-undo)
   (map! :map boon-x-map :g "U" 'undo-tree-redo)
-  (map! :map boon-x-map :g "u v" 'undo-tree-redo)
   (map! :map boon-command-map :g "M-V" 'scroll-up-command)
   (map! :map boon-command-map :g "r" #'consult-line)
   (map! :map boon-select-map :g "S" #'boon-select-sentence)
@@ -204,7 +203,8 @@
   (map! :map boon-command-map :g "M" #'zz-half-scroll-backwards-with-view)
   (map! :map boon-x-map :g "s" #'save-buffer)
   (map! :map boon-x-map :g "S" #'save-some-buffers)
-  (add-to-list 'boon-special-mode-list 'sly-db-mode))
+  (add-to-list 'boon-special-mode-list 'sly-db-mode)
+  (add-hook 'isearch-mode-end-hook #'boon-unhighlight))
 
 (require 'view)
 (defun zz-half-scroll-forward-with-view ()
