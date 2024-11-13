@@ -41,12 +41,13 @@
   (setq doom-themes-enable-bold t))
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
-  '(font-lock-keyword-face :slant italic)
-  (let ((color (color-darken-name
-                (face-attribute 'default :background) 5)))
-    `(org-block :background ,color)
-    `(org-block-begin-line :background ,color :extend t)
-    `(org-block-end-line :background ,color :extend t)))
+  '(font-lock-keyword-face :slant italic))
+(after! '(color faces)
+  (let ((color (color-darken-name (face-attribute 'default :background) 5)))
+    (custom-set-faces!
+      `(org-block :background ,color)
+      `(org-block-begin-line :background ,color :extend t)
+      `(org-block-end-line :background ,color :extend t))))
 (set-mouse-color "snow")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
