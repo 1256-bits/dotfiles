@@ -130,9 +130,12 @@
 ;;   (flycheck-disable-checker 'proselint))
 ;; EDTS
 
-(after! erlang
+(use-package! erlang
+  :config
+  ;; I don't know why but when I intall it forked it behaves in a way that requires this shit
+  (setq edts-inhibit-package-check t)
   (require 'edts-start)
-  (auto-complete-mode))
+  (add-hook 'erlang-mode-hook #'auto-complete-mode))
 
 ;; Spray mode
 (map! :g "<f6>" #'spray-mode)
