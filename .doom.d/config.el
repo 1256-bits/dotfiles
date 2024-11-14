@@ -96,12 +96,11 @@
 
 ;; Keybinds
 ;; Insert " " because of evil mode
-(map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
+(map! :leader "t s" (λ! (org-timestamp-nd-formatted nil "verbatium")))
 (map! :leader "o x" #'flexible-scratch-choise)
-(map! :leader "SPC" (lambda () (interactive)
-                      (if (equal (projectile-project-p) (f-expand "~/"))
-                          (princ "Root is $HOME, ignore")
-                        (projectile-find-file))))
+(map! :leader "SPC" (λ! (if (equal (projectile-project-p) (f-expand "~/"))
+                            (princ "Root is $HOME, ignore")
+                          (projectile-find-file))))
 (add-hook 'dired-after-readin-hook #'zoxide-add-default-dir)
 
 ;; (map! :leader
@@ -154,7 +153,7 @@
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   (add-hook 'nov-mode-hook #'visual-line-mode)
   (setq dictionary-default-dictionary "wn")
-  (map! :map 'nov-mode-map "C-c C-d" (lambda () (interactive)(dictionary-search (word-at-point)))))
+  (map! :map 'nov-mode-map "C-c C-d" (λ! (dictionary-search (word-at-point)))))
 
 ;; God mode
 (use-package! god-mode
