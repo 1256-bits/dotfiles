@@ -117,8 +117,8 @@
 (map! :leader "C-f" nil)
 (map! :leader "C-z" #'dired-zoxide)
 
-(map! :m 'minibuffer-mode-map :g "M-i" #'previous-line)
-(map! :m 'minibuffer-mode-map :g "M-o" #'next-line)
+(map! :map 'minibuffer-mode-map "M-i" #'previous-line)
+(map! :map 'minibuffer-mode-map "M-o" #'next-line)
 
 ;; Tab bar mode
 (setq tab-bar-show nil)
