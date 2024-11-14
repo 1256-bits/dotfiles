@@ -92,6 +92,8 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(setq bookmark-save-flag 1)
+
 ;; Keybinds
 ;; Insert " " because of evil mode
 (map! :leader "t s" (lambda () (interactive)(insert " ")(org-timestamp-nd-formatted nil "verbatium")))
