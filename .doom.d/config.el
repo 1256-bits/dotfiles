@@ -190,6 +190,19 @@
 ;; (map! :leader "7" 'harpoon-go-to-7)
 ;; (map! :leader "8" 'harpoon-go-to-8)
 ;; (map! :leader "9" 'harpoon-go-to-9)
+;; Consult
+(when (modulep! :completion vertico)
+  (map! :map isearch-mode-map :g "C-o" #'my-isearch-consult-line-from-isearch)
+  (defun my-isearch-consult-line-from-isearch ()
+    "Invoke `consult-line' from isearch."
+    (interactive)
+    (let ((query (if isearch-regexp
+		     isearch-string
+		   (regexp-quote isearch-string))))
+      (isearch-update-ring isearch-string isearch-regexp)
+      (let (search-nonincremental-instead)
+        (ignore-errors (isearch-done t t)))
+      (consult-line query))))
 
 ;; Boon
 (use-package! boon
