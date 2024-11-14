@@ -446,11 +446,13 @@
                                                   (?3 "common-lisp")
                                                   (?4 "lisp-interaction"))))))
 (defun zoxide--get-dir-list (query)
+  "Accept a query string and return a cons of the first two results of zoxide query"
   (let* ((query-list (s-split-words query))
          (dir-list (apply #'process-lines "zoxide" "query" "-l" query-list)))
     (list (nth 0 dir-list) (nth 1 dir-list))))
 
 (defun dired-zoxide ()
+  "Interactively ask for a zoxide query and open dired at the resulting directory"
   (interactive)
   (let* ((query (read-string "z: "))
          (dir-list (zoxide--get-dir-list query)))
@@ -459,11 +461,13 @@
     (dired-zoxide-cd dir-list)))
 
 (defun dired-zoxide-cd (dir-list)
+  "Open dired at car of `dir-list.' If you are already at that folder, open the cdr of `dir-list' and vise versa"
   (when (equal 1 (length dir-list)) (dired (car dir-list)))
   (if (equal default-directory (concat (car dir-list) (f-path-separator)))
       (dired (cdr dir-list))
     (dired (car dir-list))))
 
 (defun zoxide-add-default-dir ()
+  "Runs \"zoxide add\" on `default-directory'"
   (process-lines "zoxide" "add" default-directory)
   (message "added %s" default-directory))
