@@ -204,13 +204,16 @@
         (ignore-errors (isearch-done t t)))
       (consult-line query))))
 
+;; PDFTools
+(when (modulep! :tools pdf)
+  (add-hook 'pdf-view-mode-hook #'pdf-view-auto-slice-minor-mode))
+
 ;; Boon
 (use-package! boon
   :if (require 'boon-qwerty nil 'noerror)
   :config
   (boon-mode)
-  (map! :map boon-x-map "u" 'undo-tree-undo)
-  (map! :map boon-x-map "U" 'undo-tree-redo)
+  (map! :map boon-command-map "_" 'undo-tree-redo)
   (map! :map boon-command-map "M-V" 'scroll-up-command)
   (map! :map boon-command-map "r" #'consult-line)
   (map! :map boon-select-map "S" #'boon-select-sentence)
@@ -219,6 +222,7 @@
   (map! :map boon-command-map "M" #'zz-half-scroll-backwards-with-view)
   (map! :map boon-x-map "s" #'save-buffer)
   (map! :map boon-x-map "S" #'save-some-buffers)
+  (map! :map boon-goto-map "r" #'+vertico/search-symbol-at-point)
   (add-to-list 'boon-special-mode-list 'sly-db-mode)
   (add-hook 'isearch-mode-end-hook #'boon-unhighlight))
 
