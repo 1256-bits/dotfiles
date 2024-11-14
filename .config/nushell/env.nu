@@ -86,5 +86,7 @@ $env.EDITOR = "nvim"
 $env.VISUAL = "nvim"
 $env.BUN_INSTALL = $"($env.HOME)/.bun"
 $env.BROWSER = "librewolf"
+$env.GUIX_PROFILE = "/home/iris/.guix-profile"
+$env.TERMINFO_DIRS = $"($env.GUIX_PROFILE)/etc/profile"
 
 zoxide init nushell | save -f ~/.zoxide.nu
