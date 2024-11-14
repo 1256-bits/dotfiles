@@ -56,7 +56,7 @@
 (package! org-transclusion)
 ;; (package! edts :recipe (cdr (append (straight-recipes-retrieve 'edts) '(:pre-build ("make" "all")))))
 ;; upstream edts is currently borken due to mochiweb upgrade. Forked to unpin mochiweb.
-(package! edts :recipe '(:type git :host github :repo "1256-bits/edts" :pre-build ("make" "all")))
+(package! edts :recipe '(:type git :host github :repo "1256-bits/edts" :pre-build "make"))
 (unpin! edts)
 ;; Don't attempt to install distel ever again. It is broken beyond any use.
 (package! spray)
