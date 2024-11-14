@@ -222,7 +222,7 @@
   (map! :map boon-x-map "s" #'save-buffer)
   (map! :map boon-x-map "S" #'save-some-buffers)
   (map! :map boon-goto-map "r" #'+vertico/search-symbol-at-point)
-  (add-to-list 'boon-special-mode-list 'sly-db-mode)
+  (appendq! boon-special-mode-list '(sly-db-mode pdf-outline-buffer-mode))
   (add-hook 'isearch-mode-end-hook #'boon-unhighlight))
 
 (require 'view)
@@ -330,6 +330,12 @@
                       '("<escape>" . ignore))))
         (meow-setup)
         (meow-global-mode 1)))
+
+;; Autocapitalize
+(use-package! auto-capitalize
+  :config
+  ;; (setq auto-capitalize-ask nil)
+  (add-hook! (org-mode text-mode markdown-mode) #'auto-capitalize-mode))
 
 ;; org roam
 (setq org-roam-directory (file-truename "~/Documents/roam"))
