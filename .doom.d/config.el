@@ -141,7 +141,7 @@
   (add-hook 'erlang-mode-hook #'auto-complete-mode))
 
 ;; Spray mode
-(map! :g "<f6>" #'spray-mode)
+(map! "<f6>" #'spray-mode)
 (add-hook 'spray-mode-hook
           (lambda () (setq spray-margin-top (round (* (window-body-height) 0.25)))
             (setq spray-margin-left (round (* (window-body-width) 0.2)))))
@@ -154,24 +154,24 @@
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   (add-hook 'nov-mode-hook #'visual-line-mode)
   (setq dictionary-default-dictionary "wn")
-  (map! :map 'nov-mode-map :g "C-c C-d" (lambda () (interactive)(dictionary-search (word-at-point)))))
+  (map! :map 'nov-mode-map "C-c C-d" (lambda () (interactive)(dictionary-search (word-at-point)))))
 
 ;; God mode
 (use-package! god-mode
   :if (require 'god-mode nil 'noerror)
   :config
   (setq god-mode-enable-function-key-translation nil)
-  (map! :g (kbd "<escape>") #'god-local-mode)
+  (map! (kbd "<escape>") #'god-local-mode)
   (require 'god-mode-isearch)
-  (map! :map isearch-mode-map :g (kbd "<escape>") #'god-mode-isearch-activate)
-  (map! :map god-mode-isearch-map :g (kbd "<escape>") #'god-mode-isearch-disable)
-  (map! :map god-local-mode-map :g (kbd ".") #'repeat)
-  (map! :g "C-x C-1" #'delete-other-windows)
-  (map! :g "C-x C-2" #'split-window-below)
-  (map! :g "C-x C-3" #'split-window-right)
-  (map! :g "C-x C-0" #'delete-window)
-  (map! :map god-local-mode-map :g  "[" #'backward-paragraph)
-  (map! :map god-local-mode-map :g "]" #'forward-paragraph)
+  (map! :map isearch-mode-map (kbd "<escape>") #'god-mode-isearch-activate)
+  (map! :map god-mode-isearch-map (kbd "<escape>") #'god-mode-isearch-disable)
+  (map! :map god-local-mode-map (kbd ".") #'repeat)
+  (map! "C-x C-1" #'delete-other-windows)
+  (map! "C-x C-2" #'split-window-below)
+  (map! "C-x C-3" #'split-window-right)
+  (map! "C-x C-0" #'delete-window)
+  (map! :map god-local-mode-map  "[" #'backward-paragraph)
+  (map! :map god-local-mode-map "]" #'forward-paragraph)
   (add-hook 'spray-mode-hook
             (if spray-mode (god-local-mode-pause)
               (god-local-mode-resue))))
@@ -192,7 +192,7 @@
 ;; (map! :leader "9" 'harpoon-go-to-9)
 ;; Consult
 (when (modulep! :completion vertico)
-  (map! :map isearch-mode-map :g "C-o" #'my-isearch-consult-line-from-isearch)
+  (map! :map isearch-mode-map "C-o" #'my-isearch-consult-line-from-isearch)
   (defun my-isearch-consult-line-from-isearch ()
     "Invoke `consult-line' from isearch."
     (interactive)
@@ -209,16 +209,16 @@
   :if (require 'boon-qwerty nil 'noerror)
   :config
   (boon-mode)
-  (map! :map boon-x-map :g "u" 'undo-tree-undo)
-  (map! :map boon-x-map :g "U" 'undo-tree-redo)
-  (map! :map boon-command-map :g "M-V" 'scroll-up-command)
-  (map! :map boon-command-map :g "r" #'consult-line)
-  (map! :map boon-select-map :g "S" #'boon-select-sentence)
-  (map! :map boon-select-map :g "t" #'boon-select-org-tree)
-  (map! :map boon-command-map :g "m" #'zz-half-scroll-forward-with-view)
-  (map! :map boon-command-map :g "M" #'zz-half-scroll-backwards-with-view)
-  (map! :map boon-x-map :g "s" #'save-buffer)
-  (map! :map boon-x-map :g "S" #'save-some-buffers)
+  (map! :map boon-x-map "u" 'undo-tree-undo)
+  (map! :map boon-x-map "U" 'undo-tree-redo)
+  (map! :map boon-command-map "M-V" 'scroll-up-command)
+  (map! :map boon-command-map "r" #'consult-line)
+  (map! :map boon-select-map "S" #'boon-select-sentence)
+  (map! :map boon-select-map "t" #'boon-select-org-tree)
+  (map! :map boon-command-map "m" #'zz-half-scroll-forward-with-view)
+  (map! :map boon-command-map "M" #'zz-half-scroll-backwards-with-view)
+  (map! :map boon-x-map "s" #'save-buffer)
+  (map! :map boon-x-map "S" #'save-some-buffers)
   (add-to-list 'boon-special-mode-list 'sly-db-mode)
   (add-hook 'isearch-mode-end-hook #'boon-unhighlight))
 
