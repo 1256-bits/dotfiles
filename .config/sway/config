@@ -293,7 +293,7 @@ exec --no-startup-id $browser
 exec --no-startup-id $HOME/.config/sway/tor.sh
 exec --no-startup-id keepassxc
 exec --no-startup-id swaymsg 'workspace 9; layout tabbed; workspace 1'
-exec --no-startup-id i3-sensible-terminal
+exec --no-startup-id $term
 exec --no-startup-id udiskie
 exec --no-startup-id dunst
 exec --no-startup-id nm-applet
