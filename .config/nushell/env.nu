@@ -80,13 +80,14 @@ $env.NU_PLUGIN_DIRS = [
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
-let mypath = [ $"($env.HOME)/.npm_packages/bin/", $"($env.HOME)/go/bin", $"($env.HOME)/.config/emacs/bin", $"($env.HOME)/.cargo/bin", $"($env.HOME)/.bun/bin", $"($env.HOME)/.local/bin", $"($env.HOME)/.guix-profile/bin"]
+let mypath = [ $"($env.HOME)/.npm_packages/bin/", $"($env.HOME)/go/bin", $"($env.HOME)/.config/emacs/bin", $"($env.HOME)/.cargo/bin", $"($env.HOME)/.local/bin"]
 $env.PATH = ($env.PATH | split row (char esep) | prepend $mypath)
 $env.EDITOR = "nvim"
 $env.VISUAL = "nvim"
-$env.BUN_INSTALL = $"($env.HOME)/.bun"
 $env.BROWSER = "librewolf"
 $env.GUIX_PROFILE = "/home/iris/.guix-profile"
-$env.TERMINFO_DIRS = $"($env.GUIX_PROFILE)/etc/profile"
+
+let guix_envvar = open $"($env.GUIX_PROFILE)/etc/profile" | lines | where $it =~ ^export | split column -r " |=" -n 3 | get column2
+sh -c ". $GUIX_PROFILE/etc/profile && env" | lines | split column "=" -n 2 | where column1 in $guix_envvar | transpose --header-row | into record | load-env
 
 zoxide init nushell | save -f ~/.zoxide.nu
