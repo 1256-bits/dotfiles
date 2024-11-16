@@ -67,3 +67,5 @@
 (package! auto-capitalize :recipe '(:type git :host github :repo "yuutayamada/auto-capitalize-el"))
 (package! boon)
 (package! meow :disable t)
+(package! nushell-ts-mode)
+(package! fennel-mode)
