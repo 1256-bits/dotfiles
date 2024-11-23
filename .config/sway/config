@@ -56,7 +56,7 @@ output * bg ~/Pictures/bd0f92d3fe5ce402ef85ff165569ebf4.png fill
 
 input "type:pointer" {
     accel_profile flat
-    pointer_accel -0.4
+    pointer_accel -0.39
 }
 
 input "type:touchpad" {
@@ -297,3 +297,4 @@ exec --no-startup-id $term
 exec --no-startup-id udiskie
 exec --no-startup-id dunst
 exec --no-startup-id nm-applet
+#output HDMI-A-1 resolution 1280x720 
