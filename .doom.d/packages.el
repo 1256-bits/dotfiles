@@ -56,7 +56,7 @@
 (package! org-transclusion)
 ;; (package! edts :recipe (cdr (append (straight-recipes-retrieve 'edts) '(:pre-build ("make" "all")))))
 ;; upstream edts is currently borken due to mochiweb upgrade. Forked to unpin mochiweb.
-(package! edts :recipe '(:type git :host github :repo "1256-bits/edts" :pre-build "make"))
+(package! edts :recipe '(:type git :host github :repo "1256-bits/edts" :pre-build "make") :disable t)
 (unpin! edts)
 ;; Don't attempt to install distel ever again. It is broken beyond any use.
 (package! spray)
@@ -69,3 +69,6 @@
 (package! meow :disable t)
 (package! nushell-ts-mode)
 (package! fennel-mode)
+;; (package! janet-mode)
+;; (package! janet-ts-mode :recipe '(:host github :repo "sogaiu/janet-ts-mode" :files ("*.el")))
+(package! ajrepl :recipe '(:host github :repo "sogaiu/ajrepl" :files ("*.el" "ajrepl")))
