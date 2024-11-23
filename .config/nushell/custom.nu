@@ -113,15 +113,23 @@ def unalias [command] {
 }
 
 # Formatted wc
-def wc [file?] {
+def wc [file? --lines (-l) --chars (-c) --words (-w)] {
   let stdin = $in
-  let formatter = {|$input| $input | split row (char newline) | split column -c " " | rename lines words characters filename}
+  let formatter = {|input| $input | split row (char newline) | split column -c " " | rename lines words characters filename | update filename {|f| $f | to text | path basename} }
   if ($stdin | not-empty) {
     let result = $stdin | ^wc -lwm | do $formatter $in
     return $result
   }
   let file = $file | path expand
-  ^wc -lwm $file | do $formatter $in
+  let result = ^wc -lwm $file | do $formatter $in
+  if ($lines) {
+    return ($result | select lines filename)
+  } else if ($chars) {
+    return ($result | select characters filename)
+  } else if ($words) {
+    return ($result | select words filename)
+  }
+  return $result
 }
 
 # Cd to one of the currently mounted media devices
