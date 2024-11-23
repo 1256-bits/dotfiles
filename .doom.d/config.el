@@ -112,6 +112,7 @@
 ;;        :desc "Fold all regions"     "C-f" #'hs-hide-all
 ;;        :desc "Unfold all regions"   "C-u" #'hs-show-all
 ;;        :desc "Delete all folded regions" "C-d" #'hs-kill-all))
+(map! :map 'dictionary-mode-map "d" #'dictionary-search)
 
 (map! :leader "C-f" nil)
 (map! :leader "C-z" #'dired-zoxide)
