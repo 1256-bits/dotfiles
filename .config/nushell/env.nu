@@ -82,10 +82,12 @@ $env.NU_PLUGIN_DIRS = [
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 let mypath = [ $"($env.HOME)/.npm_packages/bin/", $"($env.HOME)/go/bin", $"($env.HOME)/.config/emacs/bin", $"($env.HOME)/.cargo/bin", $"($env.HOME)/.local/bin"]
 $env.PATH = ($env.PATH | split row (char esep) | prepend $mypath)
-$env.EDITOR = "nvim"
-$env.VISUAL = "nvim"
+let nvim = which nvim | get path
+$env.EDITOR = $nvim
+$env.VISUAL = $nvim
 $env.BROWSER = "librewolf"
-$env.GUIX_PROFILE = "/home/iris/.guix-profile"
+$env.INFOPATH = "/usr/share/info"
+$env.GUIX_PROFILE = $"($env.HOME)/.guix-profile"
 
 let guix_envvar = open $"($env.GUIX_PROFILE)/etc/profile" | lines | where $it =~ ^export | split column -r " |=" -n 3 | get column2
 sh -c ". $GUIX_PROFILE/etc/profile && env" | lines | split column "=" -n 2 | where column1 in $guix_envvar | transpose --header-row | into record | load-env
