@@ -133,13 +133,17 @@
 ;;   (flycheck-disable-checker 'proselint))
 ;; EDTS
 
+(unless (member "/usr/share/info" Info-directory-list) (setq Info-directory-list (cons "/usr/share/info" Info-directory-list)))
+(setq native-comp-jit-compilation t)
+
 (use-package! erlang
   :config
   ;; I don't know why but when I intall it forked it behaves in a way that requires this shit
   (setq edts-inhibit-package-check t)
-  (require 'edts-start)
-  (add-hook 'erlang-mode-hook #'auto-complete-mode))
-
+  (use-package! edts
+    :config
+    (require 'edts-start)
+    (add-hook 'erlang-mode-hook #'auto-complete-mode)))
 ;; Spray mode
 (map! "<f6>" #'spray-mode)
 (add-hook 'spray-mode-hook
@@ -223,7 +227,8 @@
   (map! :map boon-x-map "s" #'save-buffer)
   (map! :map boon-x-map "S" #'save-some-buffers)
   (map! :map boon-goto-map "r" #'+vertico/search-symbol-at-point)
-  (appendq! boon-special-mode-list '(sly-db-mode pdf-outline-buffer-mode))
+  (map! :map boon-command-map "g `" #'+popup/toggle)
+  (appendq! boon-special-mode-list '(sly-db-mode pdf-outline-buffer-mode dictionary-mode))
   (add-hook 'isearch-mode-end-hook #'boon-unhighlight))
 
 (require 'view)
